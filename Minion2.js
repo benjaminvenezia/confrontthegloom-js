@@ -1,4 +1,4 @@
-class Minion1 extends Enemy {
+class Minion2 extends Enemy {
   constructor(game) {
     super(game);
     this.width = 58;

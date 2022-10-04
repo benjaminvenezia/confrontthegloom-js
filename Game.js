@@ -41,11 +41,13 @@ window.addEventListener("load", function () {
       this.gameOver = bool;
     }
 
+    getFormattedTime(gameTime) {
+      return (this.gameTime * 0.001).toFixed(1);
+    }
+
     update(deltaTime) {
       if (!this.gameOver) {
         this.gameTime += deltaTime;
-
-        const formattedTime = (this.gameTime * 0.001).toFixed(1);
 
         if (this.difficultyTimer > this.difficultyInterval) {
           this.enemyInterval -= this.enemyIntervalDecrement;
@@ -108,7 +110,13 @@ window.addEventListener("load", function () {
     }
 
     addEnemy() {
-      this.enemies.push(new Minion1(this));
+      const minion1TimeMax = 20;
+
+      if (this.getFormattedTime(this.gameTime) < minion1TimeMax) {
+        this.enemies.push(new Minion1(this));
+      } else {
+        this.enemies.push(new Minion2(this));
+      }
     }
 
     checkCollision(rect1, rect2) {

@@ -12,13 +12,18 @@ class Player {
   }
 
   update() {
-    if (this.game.keys.includes("ArrowUp") && this.game.player.y > 0) {
+    let py = this.game.player.y;
+    let px = this.game.player.x;
+    let gHeight = this.game.height;
+    let gWidth = this.game.width;
+
+    if (this.game.keys.includes("ArrowUp") && py > 0) {
       this.speedY = -this.maxSpeed;
-    } else if (this.game.keys.includes("ArrowDown") && this.game.player.y < this.game.height - this.game.player.height) {
+    } else if (this.game.keys.includes("ArrowDown") && py < gHeight - this.game.player.height) {
       this.speedY = this.maxSpeed;
-    } else if (this.game.keys.includes("ArrowRight")) {
+    } else if (this.game.keys.includes("ArrowRight") && px < gWidth - 50) {
       this.speedX = this.maxSpeed;
-    } else if (this.game.keys.includes("ArrowLeft")) {
+    } else if (this.game.keys.includes("ArrowLeft") && px > 0) {
       this.speedX = -this.maxSpeed;
     } else {
       this.speedY = 0;
