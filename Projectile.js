@@ -5,7 +5,8 @@ class Projectile {
     this.y = y;
     this.width = 15;
     this.height = 15;
-    this.speed = 10;
+    this.speed = 3;
+    this.damage = 1;
     this.markedForDeletion = false;
   }
 

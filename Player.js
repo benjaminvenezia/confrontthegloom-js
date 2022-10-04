@@ -1,8 +1,8 @@
 class Player {
   constructor(game) {
     this.game = game;
-    this.width = 60;
-    this.height = 90;
+    this.width = 45;
+    this.height = 55;
     this.x = 20;
     this.y = 100;
     this.speedY = 0;
@@ -55,7 +55,7 @@ class Player {
 
   shootTop() {
     if (this.game.ammo > 0) {
-      this.projectiles.push(new Projectile(this.game, this.x + 40, this.y + 50));
+      this.projectiles.push(new Projectile(this.game, this.x + 40, this.y + 22.5));
       this.game.ammo--;
     }
   }
