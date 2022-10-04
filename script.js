@@ -101,7 +101,7 @@ window.addEventListener("load", function () {
 
     shootTop() {
       if (this.game.ammo > 0) {
-        this.projectiles.push(new Projectile(this.game, this.x, this.y));
+        this.projectiles.push(new Projectile(this.game, this.x + 40, this.y + 50));
         this.game.ammo--;
       }
     }
@@ -225,7 +225,7 @@ window.addEventListener("load", function () {
 
       this.difficultyTimer = 0;
       //fréquence en ms entre chaque réduction de l'interval de temps d'apparition
-      this.difficultyInterval = 1000;
+      this.difficultyInterval = 5000;
       //durée à décrémenter à chaque événement de diminution du temps
       this.enemyIntervalDecrement = 50;
     }
