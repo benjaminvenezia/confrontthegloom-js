@@ -138,18 +138,52 @@ window.addEventListener("load", function () {
       this.color = "white";
     }
 
+    printTimer(context) {
+      const formattedTime = (this.game.gameTime * 0.001).toFixed(1);
+      context.fillText("Timer: " + formattedTime, 20, 100);
+    }
+
     printAmmo(context) {
-      context.fillStyle = "yellow";
       for (let i = 0; i < this.game.ammo; i++) {
         context.fillRect(20 + 5 * i, 50, 3, 20);
       }
     }
 
+    printEndGameMessage(context) {
+      if (this.game.gameOver) {
+        context.textAlign = "center";
+        let message1;
+        let message2;
+
+        if (this.game.score > this.game.winningScore) {
+          message1 = "Tu as gagné!";
+          message2 = "Bien joué.";
+        } else {
+          message1 = "Tu as perdu...";
+          message2 = "Tu feras mieux la prochaine fois.";
+        }
+
+        context.font = "50px " + this.fontFamily;
+        context.fillText(message1, this.game.width * 0.5, this.game.height * 0.5 - 40);
+        context.font = "25px " + this.fontFamily;
+        context.fillText(message2, this.game.width * 0.5, this.game.height * 0.5 + 40);
+      }
+    }
+
     draw(context) {
+      context.save();
+      context.fillStyle = this.color;
+      context.shadowOffsetX = 1;
+      context.shadowOffsetY = 1;
+      context.shadowColor = "black";
       context.font = this.fontSize + "px" + this.fontFamily;
       context.fillText("Score : " + this.game.score, 20, 40);
 
+      this.printTimer(context);
       this.printAmmo(context);
+      this.printEndGameMessage(context);
+
+      context.restore();
     }
   }
 
@@ -170,9 +204,15 @@ window.addEventListener("load", function () {
       this.ammoInterval = 500;
       this.gameOver = false;
       this.score = 0;
+      this.winningScore = 2;
+      this.gameTime = 0;
     }
 
     update(deltaTime) {
+      if (!this.gameOver) {
+        this.gameTime += deltaTime;
+      }
+
       this.player.update();
 
       if (this.ammoTimer > this.ammoInterval) {
@@ -211,6 +251,10 @@ window.addEventListener("load", function () {
         this.enemyTimer = 0;
       } else {
         this.enemyTimer += deltaTime;
+      }
+
+      if (this.score > 2) {
+        this.gameOver = true;
       }
     }
 
