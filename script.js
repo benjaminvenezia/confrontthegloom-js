@@ -58,12 +58,17 @@ window.addEventListener("load", function () {
       this.speedY = 0;
       this.maxSpeed = 5;
       this.projectiles = [];
+      this.lives = 3;
     }
 
     update() {
-      if (this.game.keys.includes("ArrowUp")) this.speedY = -this.maxSpeed;
-      else if (this.game.keys.includes("ArrowDown")) this.speedY = this.maxSpeed;
-      else this.speedY = 0;
+      if (this.game.keys.includes("ArrowUp") && this.game.player.y > 0) {
+        this.speedY = -this.maxSpeed;
+      } else if (this.game.keys.includes("ArrowDown") && this.game.player.y < this.game.height - this.game.player.height) {
+        this.speedY = this.maxSpeed;
+      } else {
+        this.speedY = 0;
+      }
 
       this.y += this.speedY;
 
@@ -149,26 +154,25 @@ window.addEventListener("load", function () {
       }
     }
 
-    // printEndGameMessage(context) {
-    //   if (this.game.ga) {
-    //     context.textAlign = "center";
-    //     let message1;
-    //     let message2;
+    printLives(context) {
+      for (let i = 0; i < this.game.player.lives; i++) {
+        context.fillStyle = "red";
+        context.fillRect(20 * i + 20, 5, 15, 15);
+      }
+    }
 
-    //     if (this.game.xp > this.game.winningScore) {
-    //       message1 = "Tu as gagné!";
-    //       message2 = "Bien joué.";
-    //     } else {
-    //       message1 = "Tu as perdu...";
-    //       message2 = "Tu feras mieux la prochaine fois.";
-    //     }
+    printEndGameMessage(context) {
+      if (this.game.player.lives === 0) {
+        context.textAlign = "center";
 
-    //     context.font = "50px " + this.fontFamily;
-    //     context.fillText(message1, this.game.width * 0.5, this.game.height * 0.5 - 40);
-    //     context.font = "25px " + this.fontFamily;
-    //     context.fillText(message2, this.game.width * 0.5, this.game.height * 0.5 + 40);
-    //   }
-    // }
+        let message1 = "Tu as perdu...";
+        let message2 = "Tu feras mieux la prochaine fois.";
+        context.font = "50px " + this.fontFamily;
+        context.fillText(message1, this.game.width * 0.5, this.game.height * 0.5 - 40);
+        context.font = "25px " + this.fontFamily;
+        context.fillText(message2, this.game.width * 0.5, this.game.height * 0.5 + 40);
+      }
+    }
 
     draw(context) {
       context.save();
@@ -181,7 +185,8 @@ window.addEventListener("load", function () {
 
       this.printTimer(context);
       this.printAmmo(context);
-      //   this.printEndGameMessage(context);
+      this.printLives(context);
+      this.printEndGameMessage(context);
 
       context.restore();
     }
@@ -209,9 +214,9 @@ window.addEventListener("load", function () {
 
       this.difficultyTimer = 0;
       //fréquence en ms entre chaque réduction de l'interval de temps d'apparition
-      this.difficultyInterval = 5000;
+      this.difficultyInterval = 1000;
       //durée à décrémenter à chaque événement de diminution du temps
-      this.enemyIntervalDecrement = 100;
+      this.enemyIntervalDecrement = 50;
     }
 
     update(deltaTime) {
@@ -245,6 +250,8 @@ window.addEventListener("load", function () {
         enemy.update();
         if (this.checkCollision(this.player, enemy)) {
           enemy.markedForDeletion = true;
+          this.player.lives--;
+          console.log(this.player.lives);
         }
 
         this.player.projectiles.forEach((projectile) => {
