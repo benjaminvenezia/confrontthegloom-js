@@ -45,19 +45,19 @@ window.addEventListener("load", function () {
       return (this.gameTime * 0.001).toFixed(1);
     }
 
-    updateEnemiesDifficulty() {
+    updateEnemiesDifficulty(deltaTime) {
       if (this.difficultyTimer > this.difficultyInterval) {
         this.enemyInterval -= this.enemyIntervalDecrement;
         this.difficultyTimer = 0;
         console.log(this.enemyInterval);
       } else {
-        this.difficultyTimer += this.deltaTime;
+        this.difficultyTimer += deltaTime;
       }
     }
 
     update(deltaTime) {
       if (!this.gameOver) {
-        this.updateEnemiesDifficulty();
+        this.updateEnemiesDifficulty(deltaTime);
         this.gameTime += deltaTime;
       }
 
