@@ -1,7 +1,7 @@
 window.addEventListener("load", function () {
   const canvas = document.getElementById("canvas1");
   const ctx = canvas.getContext("2d");
-  canvas.width = 500;
+  canvas.width = 900;
   canvas.height = 500;
 
   class InputHandler {
@@ -97,8 +97,6 @@ window.addEventListener("load", function () {
       this.x = this.game.width;
       this.speedX = Math.random() * -1.5 - 0.5;
       this.markedForDeletion = false;
-      this.lives = 2;
-      this.score = this.lives;
     }
 
     update() {
@@ -122,6 +120,8 @@ window.addEventListener("load", function () {
       super(game);
       this.width = 58;
       this.height = 69;
+      this.lives = 2;
+      this.xp = this.lives;
       this.y = Math.random() * (this.game.height - this.height / 2);
     }
   }
@@ -149,26 +149,26 @@ window.addEventListener("load", function () {
       }
     }
 
-    printEndGameMessage(context) {
-      if (this.game.gameOver) {
-        context.textAlign = "center";
-        let message1;
-        let message2;
+    // printEndGameMessage(context) {
+    //   if (this.game.ga) {
+    //     context.textAlign = "center";
+    //     let message1;
+    //     let message2;
 
-        if (this.game.score > this.game.winningScore) {
-          message1 = "Tu as gagné!";
-          message2 = "Bien joué.";
-        } else {
-          message1 = "Tu as perdu...";
-          message2 = "Tu feras mieux la prochaine fois.";
-        }
+    //     if (this.game.xp > this.game.winningScore) {
+    //       message1 = "Tu as gagné!";
+    //       message2 = "Bien joué.";
+    //     } else {
+    //       message1 = "Tu as perdu...";
+    //       message2 = "Tu feras mieux la prochaine fois.";
+    //     }
 
-        context.font = "50px " + this.fontFamily;
-        context.fillText(message1, this.game.width * 0.5, this.game.height * 0.5 - 40);
-        context.font = "25px " + this.fontFamily;
-        context.fillText(message2, this.game.width * 0.5, this.game.height * 0.5 + 40);
-      }
-    }
+    //     context.font = "50px " + this.fontFamily;
+    //     context.fillText(message1, this.game.width * 0.5, this.game.height * 0.5 - 40);
+    //     context.font = "25px " + this.fontFamily;
+    //     context.fillText(message2, this.game.width * 0.5, this.game.height * 0.5 + 40);
+    //   }
+    // }
 
     draw(context) {
       context.save();
@@ -177,11 +177,11 @@ window.addEventListener("load", function () {
       context.shadowOffsetY = 1;
       context.shadowColor = "black";
       context.font = this.fontSize + "px" + this.fontFamily;
-      context.fillText("Score : " + this.game.score, 20, 40);
+      context.fillText("XP : " + this.game.xp, 20, 40);
 
       this.printTimer(context);
       this.printAmmo(context);
-      this.printEndGameMessage(context);
+      //   this.printEndGameMessage(context);
 
       context.restore();
     }
@@ -197,20 +197,36 @@ window.addEventListener("load", function () {
       this.keys = [];
       this.enemies = [];
       this.enemyTimer = 0;
-      this.enemyInterval = 500;
+      //fréquence initiale d'apparition des ennemis
+      this.enemyInterval = 2000;
       this.ammo = 20;
       this.maxAmmo = 50;
       this.ammoTimer = 0;
       this.ammoInterval = 500;
       this.gameOver = false;
-      this.score = 0;
-      this.winningScore = 2;
+      this.xp = 0;
       this.gameTime = 0;
+
+      this.difficultyTimer = 0;
+      //fréquence en ms entre chaque réduction de l'interval de temps d'apparition
+      this.difficultyInterval = 5000;
+      //durée à décrémenter à chaque événement de diminution du temps
+      this.enemyIntervalDecrement = 100;
     }
 
     update(deltaTime) {
       if (!this.gameOver) {
         this.gameTime += deltaTime;
+
+        const formattedTime = (this.gameTime * 0.001).toFixed(1);
+
+        if (this.difficultyTimer > this.difficultyInterval) {
+          this.enemyInterval -= this.enemyIntervalDecrement;
+          this.difficultyTimer = 0;
+          console.log(this.enemyInterval);
+        } else {
+          this.difficultyTimer += deltaTime;
+        }
       }
 
       this.player.update();
@@ -238,7 +254,7 @@ window.addEventListener("load", function () {
 
             if (enemy.lives <= 0) {
               enemy.markedForDeletion = true;
-              this.score += enemy.score;
+              this.xp += enemy.xp;
             }
           }
         });
@@ -251,10 +267,6 @@ window.addEventListener("load", function () {
         this.enemyTimer = 0;
       } else {
         this.enemyTimer += deltaTime;
-      }
-
-      if (this.score > 2) {
-        this.gameOver = true;
       }
     }
 
