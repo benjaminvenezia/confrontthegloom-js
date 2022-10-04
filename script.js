@@ -28,16 +28,16 @@ window.addEventListener("load", function () {
       this.game = game;
       this.x = x;
       this.y = y;
-      this.width = 10;
-      this.height = 3;
-      this.speed = 3;
+      this.width = 15;
+      this.height = 15;
+      this.speed = 5;
       this.markedForDeletion = false;
     }
 
     update() {
       this.x += this.speed;
 
-      if (this.x > this.game.width * 0.95) this.markedForDeletion = true;
+      if (this.x > this.game.width) this.markedForDeletion = true;
     }
 
     draw(context) {
@@ -51,8 +51,8 @@ window.addEventListener("load", function () {
   class Player {
     constructor(game) {
       this.game = game;
-      this.width = 120;
-      this.height = 190;
+      this.width = 60;
+      this.height = 90;
       this.x = 20;
       this.y = 100;
       this.speedY = 0;
@@ -85,7 +85,7 @@ window.addEventListener("load", function () {
 
     shootTop() {
       if (this.game.ammo > 0) {
-        this.projectiles.push(new Projectile(this.game, this.x + 120, this.y + 70));
+        this.projectiles.push(new Projectile(this.game, this.x, this.y));
         this.game.ammo--;
       }
     }
@@ -97,6 +97,8 @@ window.addEventListener("load", function () {
       this.x = this.game.width;
       this.speedX = Math.random() * -1.5 - 0.5;
       this.markedForDeletion = false;
+      this.lives = 2;
+      this.score = this.lives;
     }
 
     update() {
@@ -109,6 +111,9 @@ window.addEventListener("load", function () {
     draw(context) {
       context.fillStyle = "red";
       context.fillRect(this.x, this.y, this.width, this.height);
+      context.fillStyle = "black";
+      context.font = "20px helvetica";
+      context.fillText(this.lives, this.x, this.y);
     }
   }
 
@@ -117,7 +122,7 @@ window.addEventListener("load", function () {
       super(game);
       this.width = 58;
       this.height = 69;
-      this.y = Math.random() * (this.game.height * 0.9 - this.height);
+      this.y = Math.random() * (this.game.height - this.height / 2);
     }
   }
 
@@ -130,13 +135,21 @@ window.addEventListener("load", function () {
       this.game = game;
       this.fontSize = 25;
       this.fontFamily = "Helvetica";
-      this.color = "yellow";
+      this.color = "white";
     }
 
-    draw(context) {
+    printAmmo(context) {
+      context.fillStyle = "yellow";
       for (let i = 0; i < this.game.ammo; i++) {
         context.fillRect(20 + 5 * i, 50, 3, 20);
       }
+    }
+
+    draw(context) {
+      context.font = this.fontSize + "px" + this.fontFamily;
+      context.fillText("Score : " + this.game.score, 20, 40);
+
+      this.printAmmo(context);
     }
   }
 
@@ -156,6 +169,7 @@ window.addEventListener("load", function () {
       this.ammoTimer = 0;
       this.ammoInterval = 500;
       this.gameOver = false;
+      this.score = 0;
     }
 
     update(deltaTime) {
@@ -173,6 +187,21 @@ window.addEventListener("load", function () {
 
       this.enemies.forEach((enemy) => {
         enemy.update();
+        if (this.checkCollision(this.player, enemy)) {
+          enemy.markedForDeletion = true;
+        }
+
+        this.player.projectiles.forEach((projectile) => {
+          if (this.checkCollision(projectile, enemy)) {
+            enemy.lives--;
+            projectile.markedForDeletion = true;
+
+            if (enemy.lives <= 0) {
+              enemy.markedForDeletion = true;
+              this.score += enemy.score;
+            }
+          }
+        });
       });
 
       this.enemies = this.enemies.filter((enemy) => !enemy.markedForDeletion);
@@ -196,6 +225,15 @@ window.addEventListener("load", function () {
 
     addEnemy() {
       this.enemies.push(new Angler1(this));
+    }
+
+    checkCollision(rect1, rect2) {
+      return (
+        rect1.x < rect2.x + rect2.width &&
+        rect1.x + rect1.width > rect2.x &&
+        rect1.y < rect2.y + rect2.height &&
+        rect1.height + rect1.y > rect2.y
+      );
     }
   }
 
