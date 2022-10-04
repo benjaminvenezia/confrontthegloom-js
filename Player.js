@@ -1,12 +1,13 @@
 class Player {
-  constructor(game) {
+  constructor(game, ameliorationMenu) {
     this.game = game;
+    this.ameliorationMenu = ameliorationMenu;
     this.width = 45;
     this.height = 55;
     this.x = 20;
     this.y = 100;
     this.speedY = 0;
-    this.maxSpeed = 5;
+    this.maxSpeed = ameliorationMenu.getPlayerSpeed();
     this.projectiles = [];
     this.lives = 3;
   }
@@ -55,7 +56,7 @@ class Player {
 
   shootTop() {
     if (this.game.ammo > 0) {
-      this.projectiles.push(new Projectile(this.game, this.x + 40, this.y + 22.5));
+      this.projectiles.push(new Projectile(this.game, this.ameliorationMenu, this.x + 40, this.y + 22.5));
       this.game.ammo--;
     }
   }

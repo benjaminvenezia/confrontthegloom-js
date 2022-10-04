@@ -7,4 +7,4 @@
 
 # to do
 
--
+- rendre fonctionnel le système d'amélioration (mise à jour de xp)

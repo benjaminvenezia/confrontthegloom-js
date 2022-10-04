@@ -1,13 +1,17 @@
 class Projectile {
-  constructor(game, x, y) {
+  constructor(game, ameliorationMenu, x, y) {
     this.game = game;
     this.x = x;
     this.y = y;
+    this.speed = ameliorationMenu.getBulletSpeed();
     this.width = 15;
     this.height = 15;
-    this.speed = 3;
     this.damage = 1;
     this.markedForDeletion = false;
+  }
+
+  setSpeed(n) {
+    this.speed = n;
   }
 
   update() {

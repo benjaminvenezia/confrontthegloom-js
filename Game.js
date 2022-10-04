@@ -14,9 +14,10 @@ window.addEventListener("load", function () {
     constructor(width, height) {
       this.width = width;
       this.height = height;
-      this.player = new Player(this);
+      this.ameliorationMenu = new AmeliorationMenu(this);
+      this.player = new Player(this, this.ameliorationMenu);
       this.input = new InputHandler(this);
-      this.ui = new UI(this);
+      this.ui = new UI(this, this.ameliorationMenu);
       this.keys = [];
       this.enemies = [];
       this.enemyTimer = 0;
@@ -27,7 +28,7 @@ window.addEventListener("load", function () {
       this.ammoTimer = 0;
       this.ammoInterval = 500;
       this.gameOver = false;
-      this.xp = 0;
+      this.xp = this.ameliorationMenu.getXp();
       this.gameTime = 0;
 
       this.difficultyTimer = 0;
@@ -35,6 +36,14 @@ window.addEventListener("load", function () {
       this.difficultyInterval = 5000;
       //durée à décrémenter à chaque événement de diminution du temps
       this.enemyIntervalDecrement = 50;
+    }
+
+    setXp(newValue) {
+      this.xp = newValue;
+    }
+
+    getXp() {
+      return this.xp;
     }
 
     setGameOver(bool) {
@@ -49,7 +58,7 @@ window.addEventListener("load", function () {
       if (this.difficultyTimer > this.difficultyInterval) {
         this.enemyInterval -= this.enemyIntervalDecrement;
         this.difficultyTimer = 0;
-        console.log(this.enemyInterval);
+        // console.log(this.enemyInterval);
       } else {
         this.difficultyTimer += deltaTime;
       }
@@ -106,6 +115,7 @@ window.addEventListener("load", function () {
     draw(context) {
       this.player.draw(context);
       this.ui.draw(context);
+      // this.ameliorationMenu.draw(context);
 
       this.enemies.forEach((enemy) => {
         enemy.draw(context);
@@ -118,7 +128,7 @@ window.addEventListener("load", function () {
       const numberToEnableWaveOfDespair = 5;
       const randomNumber = this.getRandomNumber(1, 30);
 
-      console.log(randomNumber);
+      // console.log(randomNumber);
 
       if (randomNumber === numberToEnableWaveOfDespair) {
         this.enemies.push(new WaveOfDespair(this));

@@ -1,6 +1,7 @@
 class UI {
-  constructor(game) {
+  constructor(game, ameliorationMenu) {
     this.game = game;
+    this.ameliorationMenu = ameliorationMenu;
     this.fontSize = 25;
     this.fontFamily = "Helvetica";
     this.color = "white";
