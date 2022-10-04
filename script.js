@@ -174,6 +174,7 @@ window.addEventListener("load", function () {
 
     printEndGameMessage(context) {
       if (this.game.player.lives === 0) {
+        this.game.setGameOver(true);
         context.textAlign = "center";
 
         let message1 = "Tu as perdu...";
@@ -228,6 +229,10 @@ window.addEventListener("load", function () {
       this.difficultyInterval = 5000;
       //durée à décrémenter à chaque événement de diminution du temps
       this.enemyIntervalDecrement = 50;
+    }
+
+    setGameOver(bool) {
+      this.gameOver = bool;
     }
 
     update(deltaTime) {
