@@ -8,7 +8,10 @@ window.addEventListener("load", function () {
     constructor(game) {
       this.game = game;
       window.addEventListener("keydown", (e) => {
-        if ((e.key === "ArrowUp" || e.key === "ArrowDown") && this.game.keys.indexOf(e.key) === -1) {
+        if (
+          (e.key === "ArrowUp" || e.key === "ArrowDown" || e.key === "ArrowRight" || e.key === "ArrowLeft") &&
+          this.game.keys.indexOf(e.key) === -1
+        ) {
           this.game.keys.push(e.key);
         } else if (e.key === " ") {
           this.game.player.shootTop();
@@ -37,7 +40,9 @@ window.addEventListener("load", function () {
     update() {
       this.x += this.speed;
 
-      if (this.x > this.game.width) this.markedForDeletion = true;
+      if (this.x > this.game.width) {
+        this.markedForDeletion = true;
+      }
     }
 
     draw(context) {
@@ -66,11 +71,17 @@ window.addEventListener("load", function () {
         this.speedY = -this.maxSpeed;
       } else if (this.game.keys.includes("ArrowDown") && this.game.player.y < this.game.height - this.game.player.height) {
         this.speedY = this.maxSpeed;
+      } else if (this.game.keys.includes("ArrowRight")) {
+        this.speedX = this.maxSpeed;
+      } else if (this.game.keys.includes("ArrowLeft")) {
+        this.speedX = -this.maxSpeed;
       } else {
         this.speedY = 0;
+        this.speedX = 0;
       }
 
       this.y += this.speedY;
+      this.x += this.speedX;
 
       this.projectiles.forEach((projectile) => {
         projectile.update();
