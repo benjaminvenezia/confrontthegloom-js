@@ -26,7 +26,7 @@ class UI {
   }
 
   printEndGameMessage(context) {
-    if (this.game.player.lives === 0) {
+    if (this.game.getGameOver() === true || this.game.player.lives === 0) {
       this.game.setGameOver(true);
       context.textAlign = "center";
 

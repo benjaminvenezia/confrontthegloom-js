@@ -8,3 +8,4 @@
 # to do
 
 - rendre fonctionnel le système d'amélioration (mise à jour de xp)
+- adapter le message en fonction du type d'ennemi qui nous tue

@@ -38,8 +38,8 @@ window.addEventListener("load", function () {
       this.enemyIntervalDecrement = 50;
     }
 
-    setXp(newValue) {
-      this.xp = newValue;
+    setXp(newXp) {
+      this.xp = newXp;
     }
 
     getXp() {
@@ -48,6 +48,10 @@ window.addEventListener("load", function () {
 
     setGameOver(bool) {
       this.gameOver = bool;
+    }
+
+    getGameOver() {
+      return this.gameOver;
     }
 
     getFormattedTime(gameTime) {
@@ -70,6 +74,7 @@ window.addEventListener("load", function () {
         this.gameTime += deltaTime;
       }
 
+      this.ameliorationMenu.update();
       this.player.update();
 
       if (this.ammoTimer > this.ammoInterval) {
@@ -84,7 +89,12 @@ window.addEventListener("load", function () {
 
       this.enemies.forEach((enemy) => {
         enemy.update();
+
         if (this.checkCollision(this.player, enemy)) {
+          if (enemy.type === "wave") {
+            this.setGameOver(true);
+          }
+
           enemy.markedForDeletion = true;
           this.player.setLife((this.player.lives -= 1));
         }
@@ -115,7 +125,6 @@ window.addEventListener("load", function () {
     draw(context) {
       this.player.draw(context);
       this.ui.draw(context);
-      // this.ameliorationMenu.draw(context);
 
       this.enemies.forEach((enemy) => {
         enemy.draw(context);
@@ -125,10 +134,8 @@ window.addEventListener("load", function () {
     addEnemy() {
       const minion1TimeMax = 20;
 
-      const numberToEnableWaveOfDespair = 5;
-      const randomNumber = this.getRandomNumber(1, 30);
-
-      // console.log(randomNumber);
+      const numberToEnableWaveOfDespair = 33;
+      const randomNumber = this.getRandomNumber(1, 40);
 
       if (randomNumber === numberToEnableWaveOfDespair) {
         this.enemies.push(new WaveOfDespair(this));

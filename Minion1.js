@@ -6,6 +6,7 @@ class Minion1 extends Enemy {
     this.lives = 2;
     this.xp = this.lives;
     this.color = "green";
+    this.type = "minion1";
     this.y = Math.random() * (this.game.height - this.height / 2);
   }
 }
