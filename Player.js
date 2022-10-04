@@ -44,6 +44,10 @@ class Player {
     });
   }
 
+  setLife(newLive) {
+    this.lives = newLive;
+  }
+
   shootTop() {
     if (this.game.ammo > 0) {
       this.projectiles.push(new Projectile(this.game, this.x + 40, this.y + 50));

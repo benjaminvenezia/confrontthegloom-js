@@ -72,8 +72,7 @@ window.addEventListener("load", function () {
         enemy.update();
         if (this.checkCollision(this.player, enemy)) {
           enemy.markedForDeletion = true;
-          this.player.lives--;
-          console.log(this.player.lives);
+          this.player.setLife((this.player.lives -= 1));
         }
 
         this.player.projectiles.forEach((projectile) => {
