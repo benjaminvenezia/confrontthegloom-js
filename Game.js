@@ -96,7 +96,7 @@ window.addEventListener("load", function () {
 
             if (enemy.lives <= 0) {
               enemy.markedForDeletion = true;
-              this.xp += enemy.xp;
+              this.ameliorationMenu.setXp((this.xp += enemy.xp));
             }
           }
         });
