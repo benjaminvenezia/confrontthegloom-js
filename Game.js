@@ -45,17 +45,20 @@ window.addEventListener("load", function () {
       return (this.gameTime * 0.001).toFixed(1);
     }
 
+    updateEnemiesDifficulty() {
+      if (this.difficultyTimer > this.difficultyInterval) {
+        this.enemyInterval -= this.enemyIntervalDecrement;
+        this.difficultyTimer = 0;
+        console.log(this.enemyInterval);
+      } else {
+        this.difficultyTimer += this.deltaTime;
+      }
+    }
+
     update(deltaTime) {
       if (!this.gameOver) {
+        this.updateEnemiesDifficulty();
         this.gameTime += deltaTime;
-
-        if (this.difficultyTimer > this.difficultyInterval) {
-          this.enemyInterval -= this.enemyIntervalDecrement;
-          this.difficultyTimer = 0;
-          console.log(this.enemyInterval);
-        } else {
-          this.difficultyTimer += deltaTime;
-        }
       }
 
       this.player.update();
@@ -112,11 +115,24 @@ window.addEventListener("load", function () {
     addEnemy() {
       const minion1TimeMax = 20;
 
+      const numberToEnableWaveOfDespair = 5;
+      const randomNumber = this.getRandomNumber(1, 30);
+
+      console.log(randomNumber);
+
+      if (randomNumber === numberToEnableWaveOfDespair) {
+        this.enemies.push(new WaveOfDespair(this));
+      }
+
       if (this.getFormattedTime(this.gameTime) < minion1TimeMax) {
         this.enemies.push(new Minion1(this));
       } else {
         this.enemies.push(new Minion2(this));
       }
+    }
+
+    getRandomNumber(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
     checkCollision(rect1, rect2) {
@@ -128,7 +144,6 @@ window.addEventListener("load", function () {
       );
     }
   }
-
   const game = new Game(canvas.width, canvas.height);
 
   let lastTime = 0;

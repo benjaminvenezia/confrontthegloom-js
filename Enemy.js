@@ -4,6 +4,7 @@ class Enemy {
     this.x = this.game.width;
     this.speedX = Math.random() * -1.5 - 0.5;
     this.markedForDeletion = false;
+    this.color = "red";
   }
 
   update() {
@@ -14,7 +15,7 @@ class Enemy {
   }
 
   draw(context) {
-    context.fillStyle = "red";
+    context.fillStyle = this.color;
     context.fillRect(this.x, this.y, this.width, this.height);
     context.fillStyle = "black";
     context.font = "20px helvetica";

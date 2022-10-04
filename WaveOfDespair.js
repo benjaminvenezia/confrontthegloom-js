@@ -1,11 +1,11 @@
-class Minion1 extends Enemy {
+class WaveOfDespair extends Enemy {
   constructor(game) {
     super(game);
-    this.width = 58;
-    this.height = 69;
-    this.lives = 2;
+    this.width = 400;
+    this.height = 300;
+    this.lives = 2000;
+    this.color = "black";
     this.xp = this.lives;
-    this.color = "green";
     this.y = Math.random() * (this.game.height - this.height / 2);
   }
 }

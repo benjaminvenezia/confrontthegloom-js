@@ -41,7 +41,7 @@ class Player {
   }
 
   draw(context) {
-    context.fillStyle = "black";
+    context.fillStyle = "orange";
     context.fillRect(this.x, this.y, this.width, this.height);
 
     this.projectiles.forEach((projectile) => {
