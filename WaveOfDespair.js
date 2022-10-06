@@ -4,7 +4,7 @@ class WaveOfDespair extends Enemy {
     this.width = game.width * 2;
     this.height = 200;
     this.lives = 2000;
-    this.speedX = Math.random() * -3.5 - 1.5;
+    this.speedX = Math.random() * -2.5 - 1.5;
     this.color = "black";
     this.type = "wave";
     this.xp = this.lives;

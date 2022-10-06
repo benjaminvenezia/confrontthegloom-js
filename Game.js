@@ -59,10 +59,11 @@ window.addEventListener("load", function () {
     }
 
     updateEnemiesDifficulty(deltaTime) {
-      if (this.difficultyTimer > this.difficultyInterval) {
+      const minimumIntervalTimeInMs = 300;
+
+      if (this.difficultyTimer > this.difficultyInterval && this.enemyInterval > minimumIntervalTimeInMs) {
         this.enemyInterval -= this.enemyIntervalDecrement;
         this.difficultyTimer = 0;
-        // console.log(this.enemyInterval);
       } else {
         this.difficultyTimer += deltaTime;
       }
@@ -74,7 +75,6 @@ window.addEventListener("load", function () {
         this.gameTime += deltaTime;
       }
 
-      this.ameliorationMenu.update();
       this.player.update();
 
       if (this.ammoTimer > this.ammoInterval) {
@@ -101,7 +101,7 @@ window.addEventListener("load", function () {
 
         this.player.projectiles.forEach((projectile) => {
           if (this.checkCollision(projectile, enemy)) {
-            enemy.lives--;
+            enemy.lives -= projectile.damage;
             projectile.markedForDeletion = true;
 
             if (enemy.lives <= 0) {

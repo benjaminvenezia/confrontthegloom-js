@@ -6,12 +6,8 @@ class Projectile {
     this.speed = ameliorationMenu.getBulletSpeed();
     this.width = 15;
     this.height = 15;
-    this.damage = 1;
+    this.damage = ameliorationMenu.getPlayerDamage();
     this.markedForDeletion = false;
-  }
-
-  setSpeed(n) {
-    this.speed = n;
   }
 
   update() {
