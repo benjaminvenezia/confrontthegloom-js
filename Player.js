@@ -18,13 +18,19 @@ class Player {
     let gHeight = this.game.height;
     let gWidth = this.game.width;
 
-    if (this.game.keys.includes("ArrowUp") && py > 0) {
+    if ((this.game.keys.includes("ArrowUp") || this.game.keys.includes("w") || this.game.keys.includes("W")) && py > 0) {
       this.speedY = -this.maxSpeed;
-    } else if (this.game.keys.includes("ArrowDown") && py < gHeight - this.game.player.height) {
+    } else if (
+      (this.game.keys.includes("ArrowDown") || this.game.keys.includes("s") || this.game.keys.includes("S")) &&
+      py < gHeight - this.game.player.height
+    ) {
       this.speedY = this.maxSpeed;
-    } else if (this.game.keys.includes("ArrowRight") && px < gWidth - 50) {
+    } else if (
+      (this.game.keys.includes("ArrowRight") || this.game.keys.includes("d") || this.game.keys.includes("D")) &&
+      px < gWidth - 50
+    ) {
       this.speedX = this.maxSpeed;
-    } else if (this.game.keys.includes("ArrowLeft") && px > 0) {
+    } else if ((this.game.keys.includes("ArrowLeft") || this.game.keys.includes("a") || this.game.keys.includes("A")) && px > 0) {
       this.speedX = -this.maxSpeed;
     } else {
       this.speedY = 0;
