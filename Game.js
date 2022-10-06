@@ -30,6 +30,7 @@ window.addEventListener("load", function () {
       this.gameOver = false;
       this.xp = this.ameliorationMenu.getXp();
       this.gameTime = 0;
+      this.bossAngryArrived = false;
 
       this.difficultyTimer = 0;
       //fréquence en ms entre chaque réduction de l'interval de temps d'apparition
@@ -90,7 +91,7 @@ window.addEventListener("load", function () {
       this.enemies.forEach((enemy) => {
         enemy.update();
 
-        if (this.checkCollision(this.player, enemy)) {
+        if (checkCollision(this.player, enemy)) {
           if (enemy.type === "wave") {
             this.setGameOver(true);
           }
@@ -103,7 +104,7 @@ window.addEventListener("load", function () {
         }
 
         this.player.projectiles.forEach((projectile) => {
-          if (this.checkCollision(projectile, enemy)) {
+          if (checkCollision(projectile, enemy)) {
             enemy.lives -= projectile.damage;
             projectile.markedForDeletion = true;
 
@@ -134,34 +135,30 @@ window.addEventListener("load", function () {
       });
     }
 
-    addEnemy() {
-      const minion1TimeMax = 30;
-
+    invokeWaveOfDespairRandomly() {
       const numberToEnableWaveOfDespair = 33;
-      const randomNumber = this.getRandomNumber(1, 40);
+      const randomNumber = getRandomNumber(1, 40);
 
       if (randomNumber === numberToEnableWaveOfDespair) {
         this.enemies.push(new WaveOfDespair(this));
       }
+    }
+
+    addEnemy() {
+      const minion1TimeMax = 2;
+      const minion2TimeMax = 4;
+
+      this.invokeWaveOfDespairRandomly();
 
       if (this.getFormattedTime(this.gameTime) < minion1TimeMax) {
         this.enemies.push(new Minion1(this));
-      } else {
+      } else if (this.getFormattedTime(this.gameTime) < minion2TimeMax) {
         this.enemies.push(new Minion2(this));
+      } else if (this.getFormattedTime(this.gameTime) >= minion2TimeMax && !this.bossAngryArrived) {
+        this.bossAngryArrived = true;
+        console.log("le boss de la colère arrive.");
+      } else {
       }
-    }
-
-    getRandomNumber(min, max) {
-      return Math.floor(Math.random() * (max - min + 1) + min);
-    }
-
-    checkCollision(rect1, rect2) {
-      return (
-        rect1.x < rect2.x + rect2.width &&
-        rect1.x + rect1.width > rect2.x &&
-        rect1.y < rect2.y + rect2.height &&
-        rect1.height + rect1.y > rect2.y
-      );
     }
   }
   const game = new Game(canvas.width, canvas.height);

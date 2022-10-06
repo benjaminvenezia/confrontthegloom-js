@@ -30,7 +30,7 @@ class AmeliorationMenu {
     this.labelDamage.textContent = this.playerDamage.toFixed(1);
     this.labelPlayerSpeed.textContent = this.playerSpeed.toFixed(1);
 
-    this.xp = 5000;
+    this.xp = 100;
 
     // BULLETS
     this.btnBulletsSpeed = document.getElementById("bulletspeed");

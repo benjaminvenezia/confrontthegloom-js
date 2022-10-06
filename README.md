@@ -14,3 +14,5 @@
 - limiter le nombre d'apparition (juste changer le type d'ennemi par la suite.)
 - menu avec toutes les infos
 - activer les collisions entre les ennemis et les waves of despair
+- faire apparaître de l'espoir (jetons) aléatoirement.
+- afficher le taux d'apparition
