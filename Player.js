@@ -39,6 +39,7 @@ class Player {
 
     this.y += this.speedY;
     this.x += this.speedX;
+
     this.maxSpeed = this.ameliorationMenu.getPlayerSpeed();
     this.lives = this.ameliorationMenu.getPlayerLife();
 

@@ -8,7 +8,7 @@ class AmeliorationMenu {
     //Gameplay value
     this.bulletSpeed = 2;
     this.bulletSpeedIncrement = 0.05;
-    this.bulletSpeedCost = this.generateArrayCost(60, 3);
+    this.bulletSpeedCost = this.generateArrayCost(4, 3);
 
     this.playerSpeed = 1;
     this.playerSpeedIncrement = 0.05;
@@ -66,16 +66,6 @@ class AmeliorationMenu {
     });
   }
 
-  generateArrayCost(n, valueStep) {
-    let arr = [];
-
-    for (let i = 1, j = 1; i <= n; i++, j += valueStep) {
-      arr.push(j);
-    }
-
-    return arr;
-  }
-
   updateBulletSpeed() {
     if (this.game.getXp() - this.bulletSpeedCost[this.bulletSpeedIndex] >= 0 && this.bulletSpeedIndex < this.bulletSpeedCost.length) {
       this.game.setXp((this.xp -= this.bulletSpeedCost[this.bulletSpeedIndex]));
@@ -84,12 +74,7 @@ class AmeliorationMenu {
 
       this.labelBulletSpeed.textContent = this.bulletSpeed.toFixed(2);
 
-      if (this.bulletSpeedIndex < this.bulletSpeedCost.length) {
-        this.btnBulletsSpeed.textContent = `cost : ${this.bulletSpeedCost[this.bulletSpeedIndex]}`;
-      } else {
-        this.btnBulletsSpeed.textContent = `max`;
-        this.btnBulletsSpeed.disabled = true;
-      }
+      this.disableButtonWhenMaximumAmeliorationCostIsReached(this.bulletSpeedIndex, this.bulletSpeedCost, this.btnBulletsSpeed);
     }
   }
 
@@ -100,12 +85,7 @@ class AmeliorationMenu {
       this.playerSpeedIndex++;
       this.labelPlayerSpeed.textContent = this.playerSpeed.toFixed(1);
 
-      if (this.playerSpeedIndex < this.playerSpeedCost.length) {
-        this.btnPlayerSpeed.textContent = `cost : ${this.playerSpeedCost[this.playerSpeedIndex]}`;
-      } else {
-        this.btnPlayerSpeed.textContent = `max`;
-        this.btnPlayerSpeed.disabled = true;
-      }
+      this.disableButtonWhenMaximumAmeliorationCostIsReached(this.playerSpeedIndex, this.playerSpeedCost, this.btnPlayerSpeed);
     }
   }
 
@@ -117,12 +97,7 @@ class AmeliorationMenu {
 
       this.labelDamage.textContent = this.playerDamage.toFixed(2);
 
-      if (this.playerDamageIndex < this.playerDamageCost.length) {
-        this.btnPlayerDamage.textContent = `cost : ${this.playerDamageCost[this.playerDamageIndex]}`;
-      } else {
-        this.btnPlayerDamage.textContent = `max`;
-        this.btnPlayerDamage.disabled = true;
-      }
+      this.disableButtonWhenMaximumAmeliorationCostIsReached(this.playerDamageIndex, this.playerDamageCost, this.btnPlayerDamage);
     }
   }
 
@@ -131,16 +106,29 @@ class AmeliorationMenu {
       this.game.setXp((this.xp -= this.playerLifeCost[this.playerLifeIndex]));
       this.playerLife += this.playerLifeIncrement;
       this.playerLifeIndex++;
-      if (this.playerLifeIndex < this.playerLifeCost.length) {
-        this.btnPlayerLife.textContent = `cost : ${this.playerLifeCost[this.playerLifeIndex]}`;
-      } else {
-        this.btnPlayerLife.textContent = `max`;
-        this.btnPlayerLife.disabled = true;
-      }
+
+      this.disableButtonWhenMaximumAmeliorationCostIsReached(this.playerLifeIndex, this.playerLifeCost, this.btnPlayerLife);
     }
   }
 
-  printInformationsPanel() {}
+  disableButtonWhenMaximumAmeliorationCostIsReached(counterIndex, arrayCost, btnToDisable) {
+    if (counterIndex < arrayCost.length) {
+      btnToDisable.textContent = `cost : ${arrayCost[counterIndex]}`;
+    } else {
+      btnToDisable.textContent = `max`;
+      btnToDisable.disabled = true;
+    }
+  }
+
+  generateArrayCost(n, valueStep) {
+    let arr = [];
+
+    for (let i = 1, j = 1; i <= n; i++, j += valueStep) {
+      arr.push(j);
+    }
+
+    return arr;
+  }
 
   getXp() {
     return this.xp;

@@ -7,6 +7,8 @@
 
 # to do
 
+- ajouter le score
+- remplacer espoirs par une icône adaptée
 - rendre fonctionnel le système d'amélioration (mise à jour de xp (damage, ajouter une vie))
 - adapter le message en fonction du type d'ennemi qui nous tue
 - limiter le nombre d'apparition (juste changer le type d'ennemi par la suite.)
