@@ -7,20 +7,20 @@ class AmeliorationMenu {
 
     //Gameplay value
     this.bulletSpeed = 2;
-    this.bulletSpeedIncrement = 0.2;
-    this.bulletSpeedCost = [2, 4, 6, 12, 33, 66];
+    this.bulletSpeedIncrement = 0.05;
+    this.bulletSpeedCost = this.generateArrayCost(60, 3);
 
     this.playerSpeed = 1;
-    this.playerSpeedIncrement = 0.2;
-    this.playerSpeedCost = [1, 3, 7, 14, 44, 55, 88, 199];
+    this.playerSpeedIncrement = 0.05;
+    this.playerSpeedCost = this.generateArrayCost(60, 3);
 
     this.playerDamage = 1;
-    this.playerDamageIncrement = 0.1;
-    this.playerDamageCost = [1, 3, 5, 7, 10, 12, 14, 18, 22, 25, 29];
+    this.playerDamageIncrement = 0.05;
+    this.playerDamageCost = this.generateArrayCost(60, 3);
 
     this.playerLife = 3;
     this.playerLifeIncrement = 1;
-    this.playerLifeCost = [10, 12, 88, 120];
+    this.playerLifeCost = this.generateArrayCost(60, 20);
 
     //informations panel
     this.labelBulletSpeed = document.getElementById("label-bulletspeed");
@@ -30,7 +30,7 @@ class AmeliorationMenu {
     this.labelDamage.textContent = this.playerDamage.toFixed(1);
     this.labelPlayerSpeed.textContent = this.playerSpeed.toFixed(1);
 
-    this.xp = 50;
+    this.xp = 5000;
 
     // BULLETS
     this.btnBulletsSpeed = document.getElementById("bulletspeed");
@@ -64,6 +64,16 @@ class AmeliorationMenu {
     this.btnPlayerLife.addEventListener("click", () => {
       this.updatePlayerLife();
     });
+  }
+
+  generateArrayCost(n, valueStep) {
+    let arr = [];
+
+    for (let i = 1, j = 1; i <= n; i++, j += valueStep) {
+      arr.push(j);
+    }
+
+    return arr;
   }
 
   updateBulletSpeed() {
