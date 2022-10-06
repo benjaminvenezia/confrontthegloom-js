@@ -4,24 +4,37 @@
 class AmeliorationMenu {
   constructor(game) {
     this.game = game;
+
     //Gameplay value
     this.bulletSpeed = 2;
     this.bulletSpeedIncrement = 0.2;
+    this.bulletSpeedCost = [2, 4, 6, 12, 33, 66];
 
     this.playerSpeed = 1;
     this.playerSpeedIncrement = 0.2;
+    this.playerSpeedCost = [1, 3, 7, 14, 44, 55, 88, 199];
 
     this.playerDamage = 1;
-    this.playerDamageIncrement = 1;
+    this.playerDamageIncrement = 0.1;
+    this.playerDamageCost = [1, 3, 5, 7, 10, 12, 14, 18, 22, 25, 29];
 
     this.playerLife = 3;
     this.playerLifeIncrement = 1;
+    this.playerLifeCost = [10, 12, 88, 120];
+
+    //informations panel
+    this.labelBulletSpeed = document.getElementById("label-bulletspeed");
+    this.labelDamage = document.getElementById("label-damage");
+    this.labelPlayerSpeed = document.getElementById("label-playerspeed");
+    this.labelBulletSpeed.textContent = this.bulletSpeed.toFixed(1);
+    this.labelDamage.textContent = this.playerDamage.toFixed(1);
+    this.labelPlayerSpeed.textContent = this.playerSpeed.toFixed(1);
 
     this.xp = 50;
 
     // BULLETS
     this.btnBulletsSpeed = document.getElementById("bulletspeed");
-    this.bulletSpeedCost = [2, 4, 6, 12, 33, 66];
+
     this.bulletSpeedIndex = 0;
     this.btnBulletsSpeed.textContent = `cost : ${this.bulletSpeedCost[this.bulletSpeedIndex]}`;
     this.btnBulletsSpeed.addEventListener("click", () => {
@@ -30,7 +43,6 @@ class AmeliorationMenu {
 
     // PLAYER SPEED
     this.btnPlayerSpeed = document.getElementById("playerspeed");
-    this.playerSpeedCost = [1, 3, 7, 14, 44, 55, 88, 199];
     this.playerSpeedIndex = 0;
     this.btnPlayerSpeed.textContent = `cost : ${this.playerSpeedCost[this.playerSpeedIndex]}`;
     this.btnPlayerSpeed.addEventListener("click", () => {
@@ -39,7 +51,6 @@ class AmeliorationMenu {
 
     // PLAYER DAMAGE
     this.btnPlayerDamage = document.getElementById("playerdamage");
-    this.playerDamageCost = [1, 3, 5, 12];
     this.playerDamageIndex = 0;
     this.btnPlayerDamage.textContent = `cost : ${this.playerDamageCost[this.playerDamageIndex]}`;
     this.btnPlayerDamage.addEventListener("click", () => {
@@ -48,7 +59,6 @@ class AmeliorationMenu {
 
     // PLAYER LIFE
     this.btnPlayerLife = document.getElementById("playerlife");
-    this.playerLifeCost = [30, 60, 88, 120];
     this.playerLifeIndex = 0;
     this.btnPlayerLife.textContent = `cost : ${this.playerLifeCost[this.playerLifeIndex]}`;
     this.btnPlayerLife.addEventListener("click", () => {
@@ -61,6 +71,9 @@ class AmeliorationMenu {
       this.game.setXp((this.xp -= this.bulletSpeedCost[this.bulletSpeedIndex]));
       this.bulletSpeed += this.bulletSpeedIncrement;
       this.bulletSpeedIndex++;
+
+      this.labelBulletSpeed.textContent = this.bulletSpeed.toFixed(2);
+
       if (this.bulletSpeedIndex < this.bulletSpeedCost.length) {
         this.btnBulletsSpeed.textContent = `cost : ${this.bulletSpeedCost[this.bulletSpeedIndex]}`;
       } else {
@@ -75,6 +88,8 @@ class AmeliorationMenu {
       this.game.setXp((this.xp -= this.playerSpeedCost[this.playerSpeedIndex]));
       this.playerSpeed += this.playerSpeedIncrement;
       this.playerSpeedIndex++;
+      this.labelPlayerSpeed.textContent = this.playerSpeed.toFixed(1);
+
       if (this.playerSpeedIndex < this.playerSpeedCost.length) {
         this.btnPlayerSpeed.textContent = `cost : ${this.playerSpeedCost[this.playerSpeedIndex]}`;
       } else {
@@ -89,6 +104,9 @@ class AmeliorationMenu {
       this.game.setXp((this.xp -= this.playerDamageCost[this.playerDamageIndex]));
       this.playerDamage += this.playerDamageIncrement;
       this.playerDamageIndex++;
+
+      this.labelDamage.textContent = this.playerDamage.toFixed(2);
+
       if (this.playerDamageIndex < this.playerDamageCost.length) {
         this.btnPlayerDamage.textContent = `cost : ${this.playerDamageCost[this.playerDamageIndex]}`;
       } else {
@@ -111,6 +129,8 @@ class AmeliorationMenu {
       }
     }
   }
+
+  printInformationsPanel() {}
 
   getXp() {
     return this.xp;

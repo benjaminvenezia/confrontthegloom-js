@@ -135,7 +135,7 @@ window.addEventListener("load", function () {
     }
 
     addEnemy() {
-      const minion1TimeMax = 20;
+      const minion1TimeMax = 30;
 
       const numberToEnableWaveOfDespair = 33;
       const randomNumber = this.getRandomNumber(1, 40);

@@ -17,7 +17,6 @@ class InputHandler {
           e.key === "D") &&
         this.game.keys.indexOf(e.key) === -1
       ) {
-        console.log(this.game.keys);
         this.game.keys.push(e.key);
       } else if (e.key === " ") {
         this.game.player.shootTop();
@@ -26,8 +25,6 @@ class InputHandler {
 
     window.addEventListener("keyup", (e) => {
       if (this.game.keys.indexOf(e.key) > -1) {
-        console.log(this.game.keys);
-
         this.game.keys.splice(this.game.keys.indexOf(e.key), 1);
       }
     });
