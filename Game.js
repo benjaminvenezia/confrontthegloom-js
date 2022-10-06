@@ -96,6 +96,9 @@ window.addEventListener("load", function () {
           }
 
           enemy.markedForDeletion = true;
+
+          let playerLife = this.ameliorationMenu.getPlayerLife();
+          this.ameliorationMenu.setPlayerLife((playerLife -= 1));
           this.player.setLife((this.player.lives -= 1));
         }
 

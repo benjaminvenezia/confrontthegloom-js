@@ -14,6 +14,9 @@ class AmeliorationMenu {
     this.playerDamage = 1;
     this.playerDamageIncrement = 1;
 
+    this.playerLife = 3;
+    this.playerLifeIncrement = 1;
+
     this.xp = 50;
 
     // BULLETS
@@ -41,6 +44,15 @@ class AmeliorationMenu {
     this.btnPlayerDamage.textContent = `cost : ${this.playerDamageCost[this.playerDamageIndex]}`;
     this.btnPlayerDamage.addEventListener("click", () => {
       this.updatePlayerDamage();
+    });
+
+    // PLAYER LIFE
+    this.btnPlayerLife = document.getElementById("playerlife");
+    this.playerLifeCost = [30, 60, 88, 120];
+    this.playerLifeIndex = 0;
+    this.btnPlayerLife.textContent = `cost : ${this.playerLifeCost[this.playerLifeIndex]}`;
+    this.btnPlayerLife.addEventListener("click", () => {
+      this.updatePlayerLife();
     });
   }
 
@@ -86,8 +98,30 @@ class AmeliorationMenu {
     }
   }
 
+  updatePlayerLife() {
+    if (this.game.getXp() - this.playerLifeCost[this.playerLifeIndex] >= 0 && this.playerLifeIndex < this.playerLifeCost.length) {
+      this.game.setXp((this.xp -= this.playerLifeCost[this.playerLifeIndex]));
+      this.playerLife += this.playerLifeIncrement;
+      this.playerLifeIndex++;
+      if (this.playerLifeIndex < this.playerLifeCost.length) {
+        this.btnPlayerLife.textContent = `cost : ${this.playerLifeCost[this.playerLifeIndex]}`;
+      } else {
+        this.btnPlayerLife.textContent = `max`;
+        this.btnPlayerLife.disabled = true;
+      }
+    }
+  }
+
   getXp() {
     return this.xp;
+  }
+
+  getPlayerLife() {
+    return this.playerLife;
+  }
+
+  setPlayerLife(newLifeValue) {
+    this.playerLife = newLifeValue;
   }
 
   setXp(value) {

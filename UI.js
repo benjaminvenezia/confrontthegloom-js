@@ -46,7 +46,7 @@ class UI {
     context.shadowOffsetY = 1;
     context.shadowColor = "black";
     context.font = this.fontSize + "px" + this.fontFamily;
-    context.fillText("XP : " + this.game.xp, 20, 40);
+    context.fillText("Espoirs : " + this.game.xp, 20, 40);
 
     this.printTimer(context);
     this.printAmmo(context);

@@ -9,7 +9,7 @@ class Player {
     this.speedY = 0;
     this.maxSpeed = ameliorationMenu.getPlayerSpeed();
     this.projectiles = [];
-    this.lives = 3;
+    this.lives = ameliorationMenu.getPlayerLife();
   }
 
   update() {
@@ -40,6 +40,7 @@ class Player {
     this.y += this.speedY;
     this.x += this.speedX;
     this.maxSpeed = this.ameliorationMenu.getPlayerSpeed();
+    this.lives = this.ameliorationMenu.getPlayerLife();
 
     this.projectiles.forEach((projectile) => {
       projectile.update();
