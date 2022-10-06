@@ -22,7 +22,7 @@ window.addEventListener("load", function () {
       this.enemies = [];
       this.enemyTimer = 0;
       //fréquence initiale d'apparition des ennemis
-      this.enemyInterval = 2000;
+      this.initialEnemyInterval = 2000;
       this.ammo = 20;
       this.maxAmmo = 50;
       this.ammoTimer = 0;
@@ -30,10 +30,11 @@ window.addEventListener("load", function () {
       this.gameOver = false;
       this.xp = this.ameliorationMenu.getXp();
       this.gameTime = 0;
+      this.bossActivation = false;
       this.bossAngryArrived = false;
 
       this.difficultyTimer = 0;
-      //fréquence en ms entre chaque réduction de l'interval de temps d'apparition
+      //Toutes les X secondes, on effectue le décrément
       this.difficultyInterval = 5000;
       //durée à décrémenter à chaque événement de diminution du temps
       this.enemyIntervalDecrement = 50;
@@ -62,8 +63,8 @@ window.addEventListener("load", function () {
     updateEnemiesDifficulty(deltaTime) {
       const minimumIntervalTimeInMs = 300;
 
-      if (this.difficultyTimer > this.difficultyInterval && this.enemyInterval > minimumIntervalTimeInMs) {
-        this.enemyInterval -= this.enemyIntervalDecrement;
+      if (this.difficultyTimer > this.difficultyInterval && this.initialEnemyInterval > minimumIntervalTimeInMs) {
+        this.initialEnemyInterval -= this.enemyIntervalDecrement;
         this.difficultyTimer = 0;
       } else {
         this.difficultyTimer += deltaTime;
@@ -92,7 +93,7 @@ window.addEventListener("load", function () {
         enemy.update();
 
         if (checkCollision(this.player, enemy)) {
-          if (enemy.type === "wave") {
+          if (enemy.type === "wave" || enemy.type === "boss") {
             this.setGameOver(true);
           }
 
@@ -109,6 +110,10 @@ window.addEventListener("load", function () {
             projectile.markedForDeletion = true;
 
             if (enemy.lives <= 0) {
+              if (enemy.type === "boss") {
+                this.bossActivation = false;
+              }
+
               enemy.markedForDeletion = true;
               this.ameliorationMenu.setXp((this.xp += enemy.xp));
             }
@@ -118,7 +123,7 @@ window.addEventListener("load", function () {
 
       this.enemies = this.enemies.filter((enemy) => !enemy.markedForDeletion);
 
-      if (this.enemyTimer > this.enemyInterval && !this.gameOver) {
+      if (this.enemyTimer > this.initialEnemyInterval && !this.gameOver) {
         this.addEnemy();
         this.enemyTimer = 0;
       } else {
@@ -139,14 +144,19 @@ window.addEventListener("load", function () {
       const numberToEnableWaveOfDespair = 33;
       const randomNumber = getRandomNumber(1, 40);
 
-      if (randomNumber === numberToEnableWaveOfDespair) {
+      if (randomNumber === numberToEnableWaveOfDespair && !this.bossActivation) {
         this.enemies.push(new WaveOfDespair(this));
       }
     }
 
+    getBossAngryArrived() {
+      return this.bossAngryArrived;
+    }
+
     addEnemy() {
-      const minion1TimeMax = 2;
-      const minion2TimeMax = 4;
+      const minion1TimeMax = 20;
+      const minion2TimeMax = 40;
+      const minion3TimeMax = 60;
 
       this.invokeWaveOfDespairRandomly();
 
@@ -156,8 +166,10 @@ window.addEventListener("load", function () {
         this.enemies.push(new Minion2(this));
       } else if (this.getFormattedTime(this.gameTime) >= minion2TimeMax && !this.bossAngryArrived) {
         this.bossAngryArrived = true;
-        console.log("le boss de la colère arrive.");
-      } else {
+        this.bossActivation = true;
+        this.enemies.push(new BossAngry(this));
+      } else if (this.getFormattedTime(this.gameTime) < minion3TimeMax && !this.bossActivation) {
+        this.enemies.push(new Minion2(this));
       }
     }
   }

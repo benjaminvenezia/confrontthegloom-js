@@ -39,6 +39,14 @@ class UI {
     }
   }
 
+  printBossMessage(context, message) {
+    if (!this.game.getGameOver()) {
+      context.textAlign = "center";
+      context.font = "50px " + this.fontFamily;
+      context.fillText(message, this.game.width * 0.5, this.game.height * 0.5);
+    }
+  }
+
   draw(context) {
     context.save();
     context.fillStyle = this.color;
@@ -52,6 +60,10 @@ class UI {
     this.printAmmo(context);
     this.printLives(context);
     this.printEndGameMessage(context);
+
+    if (this.game.getBossAngryArrived()) {
+      this.printBossMessage(context, "Affrontez votre colère.");
+    }
 
     context.restore();
   }

@@ -16,3 +16,4 @@
 - activer les collisions entre les ennemis et les waves of despair
 - faire apparaître de l'espoir (jetons) aléatoirement.
 - afficher le taux d'apparition
+- changer la taille des projctiles en fonction des dégats
