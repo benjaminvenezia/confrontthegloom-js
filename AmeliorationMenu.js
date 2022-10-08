@@ -22,13 +22,19 @@ class AmeliorationMenu {
     this.playerLifeIncrement = 1;
     this.playerLifeCost = this.generateArrayCost(60, 20);
 
+    this.initialEnemyInterval = 2000;
+    this.difficultyInterval = 5000;
+    this.enemyIntervalDecrement = 50;
+
     //informations panel
     this.labelBulletSpeed = document.getElementById("label-bulletspeed");
     this.labelDamage = document.getElementById("label-damage");
     this.labelPlayerSpeed = document.getElementById("label-playerspeed");
+    this.labelApparition = document.getElementById("label-apparition");
     this.labelBulletSpeed.textContent = this.bulletSpeed.toFixed(1);
     this.labelDamage.textContent = this.playerDamage.toFixed(1);
     this.labelPlayerSpeed.textContent = this.playerSpeed.toFixed(1);
+    this.labelApparition.textContent = this.initialEnemyInterval.toFixed(1);
 
     this.xp = 100;
 
@@ -132,6 +138,18 @@ class AmeliorationMenu {
 
   getXp() {
     return this.xp;
+  }
+
+  getInitialEnemyInterval() {
+    return this.initialEnemyInterval;
+  }
+
+  getDifficultyInterval() {
+    return this.difficultyInterval;
+  }
+
+  getEnemyIntervalDecrement() {
+    return this.enemyIntervalDecrement;
   }
 
   getPlayerLife() {

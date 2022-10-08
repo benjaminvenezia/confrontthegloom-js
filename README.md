@@ -4,6 +4,7 @@
 
 - glitch déplacement diagonal
 - message gameover disparaît quand on touche un ennemi à nouveau.
+- supprimer le message de boss après l'avoir éliminé
 
 # to do
 

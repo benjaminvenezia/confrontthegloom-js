@@ -22,7 +22,7 @@ window.addEventListener("load", function () {
       this.enemies = [];
       this.enemyTimer = 0;
       //fréquence initiale d'apparition des ennemis
-      this.initialEnemyInterval = 2000;
+      this.initialEnemyInterval = this.ameliorationMenu.getInitialEnemyInterval();
       this.ammo = 20;
       this.maxAmmo = 50;
       this.ammoTimer = 0;
@@ -35,9 +35,9 @@ window.addEventListener("load", function () {
 
       this.difficultyTimer = 0;
       //Toutes les X secondes, on effectue le décrément
-      this.difficultyInterval = 5000;
+      this.difficultyInterval = this.ameliorationMenu.getDifficultyInterval();
       //durée à décrémenter à chaque événement de diminution du temps
-      this.enemyIntervalDecrement = 50;
+      this.enemyIntervalDecrement = this.ameliorationMenu.getEnemyIntervalDecrement();
     }
 
     setXp(newXp) {
