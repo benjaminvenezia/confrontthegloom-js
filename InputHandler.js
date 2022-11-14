@@ -19,6 +19,7 @@ class InputHandler {
       ) {
         this.game.keys.push(e.key);
       } else if (e.key === " ") {
+        this.game.sound.shotSound();
         this.game.player.shootTop();
       }
     });

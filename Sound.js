@@ -8,6 +8,16 @@ class Sound {
     this.is_paused = false;
   }
 
+  shotSound() {
+    const audio = new Audio("./assets/sounds/fireball_sound.wav");
+    audio.play();
+  }
+
+  contactWithEnnemySound() {
+    const audio = new Audio("./assets/sounds/choc_with_ennemy.wav");
+    audio.play();
+  }
+
   setupGameAudio() {
     if (!this.is_paused) {
       console.log("Start audio!!");

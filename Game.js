@@ -98,7 +98,7 @@ window.addEventListener("load", function () {
           if (enemy.type === "wave" || enemy.type === "boss") {
             this.setGameOver(true);
           }
-
+          this.sound.contactWithEnnemySound();
           enemy.markedForDeletion = true;
 
           let playerLife = this.ameliorationMenu.getPlayerLife();
