@@ -35,7 +35,7 @@ class AmeliorationMenu {
     this.labelDamage.textContent = this.playerDamage.toFixed(1);
     this.labelPlayerSpeed.textContent = this.playerSpeed.toFixed(1);
     this.labelApparition.textContent = this.initialEnemyInterval.toFixed(1);
-
+    // XP
     this.xp = 100;
 
     // BULLETS
@@ -174,5 +174,9 @@ class AmeliorationMenu {
 
   getPlayerDamage() {
     return this.playerDamage;
+  }
+
+  updateMobsApparitionForPrinting(updatedInitialApparition) {
+    this.labelApparition.textContent = updatedInitialApparition.toFixed(1);
   }
 }

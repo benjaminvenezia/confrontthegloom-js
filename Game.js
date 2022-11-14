@@ -66,11 +66,12 @@ window.addEventListener("load", function () {
       if (this.difficultyTimer > this.difficultyInterval && this.initialEnemyInterval > minimumIntervalTimeInMs) {
         this.initialEnemyInterval -= this.enemyIntervalDecrement;
         this.difficultyTimer = 0;
+        this.ameliorationMenu.updateMobsApparitionForPrinting(this.initialEnemyInterval);
       } else {
         this.difficultyTimer += deltaTime;
       }
     }
-
+    // UPDATE
     update(deltaTime) {
       if (!this.gameOver) {
         this.updateEnemiesDifficulty(deltaTime);
@@ -134,6 +135,7 @@ window.addEventListener("load", function () {
     draw(context) {
       this.player.draw(context);
       this.ui.draw(context);
+      console.log(this.initialEnemyInterval);
 
       this.enemies.forEach((enemy) => {
         enemy.draw(context);
