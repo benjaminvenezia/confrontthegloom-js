@@ -20,18 +20,22 @@ class Player {
 
     if ((this.game.keys.includes("ArrowUp") || this.game.keys.includes("w") || this.game.keys.includes("W")) && py > 0) {
       this.speedY = -this.maxSpeed;
+      this.game.sound.startGameAudio(false);
     } else if (
       (this.game.keys.includes("ArrowDown") || this.game.keys.includes("s") || this.game.keys.includes("S")) &&
       py < gHeight - this.game.player.height
     ) {
       this.speedY = this.maxSpeed;
+      this.game.sound.startGameAudio(false);
     } else if (
       (this.game.keys.includes("ArrowRight") || this.game.keys.includes("d") || this.game.keys.includes("D")) &&
       px < gWidth - 50
     ) {
       this.speedX = this.maxSpeed;
+      this.game.sound.startGameAudio(false);
     } else if ((this.game.keys.includes("ArrowLeft") || this.game.keys.includes("a") || this.game.keys.includes("A")) && px > 0) {
       this.speedX = -this.maxSpeed;
+      this.game.sound.startGameAudio(false);
     } else {
       this.speedY = 0;
       this.speedX = 0;

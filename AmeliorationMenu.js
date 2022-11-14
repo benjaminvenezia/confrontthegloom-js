@@ -176,6 +176,7 @@ class AmeliorationMenu {
     return this.playerDamage;
   }
 
+  // this function is called by Game each decrement of time.
   updateMobsApparitionForPrinting(updatedInitialApparition) {
     this.labelApparition.textContent = updatedInitialApparition.toFixed(1);
   }

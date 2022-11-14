@@ -11,28 +11,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Darker+Grotesque:wght@500&display=swap"
         rel="stylesheet">
+    <script src="./utils.js"></script>
 </head>
 
 <body>
     <video autoplay muted loop id="rainvideo">
-        <source src="./assets/music/rain-homepage.mp4" type="video/mp4">
+        <source src="./assets/videos/rain-homepage.mp4" type="video/mp4">
     </video>
 
-    <script>
-        function play() {
-            let audio = document.getElementById("audio");
-
-            let cardStartTheGame = document.querySelector('.card__start');
-            let cardWelcome = document.querySelector(".background-blur");
-
-            cardWelcome.addEventListener('click', () => {
-                cardWelcome.classList.add('hide');
-                cardStartTheGame.classList.remove('hide');
-            })
-
-            audio.play();
-        }
-    </script>
 
     <div class="background-blur">
         <div class="card card__welcome center-xy">
@@ -54,7 +40,7 @@
 
     <div class="card card__start hide center-xy">
         <h1>Confront the Gloom</h1>
-        <a href="game.html" class="button">Start New game!</a>
+        <a id="btnStart" href="game.html" class="button">Start New game!</a>
     </div>
 
 
