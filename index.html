@@ -5,53 +5,60 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confront The Gloom</title>
-
-    <link rel="stylesheet" href="style.css">
+    <title>Confront the Gloom</title>
+    <link rel="stylesheet" href="./style/homepage.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Darker+Grotesque:wght@500&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <canvas id="canvas1"></canvas>
-    <div id="amelioration-menu">
-        <div>
-            <p>Bullet Speed : </p>
-            <button id="bulletspeed"></button>
-        </div>
-        <div>
-            <p>Player Speed : </p>
-            <button id="playerspeed"></button>
-        </div>
-        <div>
-            <p>Player Damage : </p>
-            <button id="playerdamage"></button>
-        </div>
-        <div>
-            <p>1 vie : </p>
-            <button id="playerlife"></button>
+    <video autoplay muted loop id="rainvideo">
+        <source src="./assets/music/rain-homepage.mp4" type="video/mp4">
+    </video>
+
+    <script>
+        function play() {
+            let audio = document.getElementById("audio");
+
+            let cardStartTheGame = document.querySelector('.card__start');
+            let cardWelcome = document.querySelector(".background-blur");
+
+            cardWelcome.addEventListener('click', () => {
+                cardWelcome.classList.add('hide');
+                cardStartTheGame.classList.remove('hide');
+            })
+
+            audio.play();
+        }
+    </script>
+
+    <div class="background-blur">
+        <div class="card card__welcome center-xy">
+            <h2>Les tenèbres vous effraient-ils?</h2>
+            <p>Bienvenue sur confront the Gloom, dans ce jeu vous affronterez les elements chaotiques de votre
+                intériorité.
+                Vous incarnerez Inyu, un petit feu intérieur qui devra évoluer contre les ennemis du jeu.
+                Espace : tirer
+                W : Monter
+                A : Déplacement à gauche
+                S : descendre
+                D : Déplacement à droite
+
+            </p>
+            <input type="button" value="Me rendre sur le menu" onclick="play()">
         </div>
     </div>
 
-    <div id="information-menu">
-        <div>
-            <p>Vitesse d'attaque: <span id="label-bulletspeed"></span></p>
-            <p>Dégats: <span id="label-damage"></span></p>
-            <p>Vitesse déplacement: <span id="label-playerspeed"></span></p>
-            <p>Apparition monstres: <span id="label-apparition"></span></p>
-        </div>
+
+    <div class="card card__start hide center-xy">
+        <h1>Confront the Gloom</h1>
+        <a href="game.html" class="button">Start New game!</a>
     </div>
 
-    <script src="./utils.js"></script>
-    <script src="./InputHandler.js"></script>
-    <script src="./Player.js"></script>
-    <script src="./Projectile.js"></script>
-    <script src="./Enemy.js"></script>
-    <script src="./WaveOfDespair.js"></script>
-    <script src="./Minion1.js"></script>
-    <script src="./Minion2.js"></script>
-    <script src="./BossAngry.js"></script>
-    <script src="./UI.js"></script>
-    <script src="./Game.js"></script>
-    <script src="./AmeliorationMenu.js"></script>
+
+    <audio id="audio" src="./assets/music/homepage-music-hq.mp3"></audio>
 
 </body>
 

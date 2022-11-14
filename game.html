@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confront The Gloom</title>
+
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+
+<body>
+    <canvas id="canvas1"></canvas>
+    <div id="amelioration-menu">
+        <div>
+            <p>Bullet Speed : </p>
+            <button id="bulletspeed"></button>
+        </div>
+        <div>
+            <p>Player Speed : </p>
+            <button id="playerspeed"></button>
+        </div>
+        <div>
+            <p>Player Damage : </p>
+            <button id="playerdamage"></button>
+        </div>
+        <div>
+            <p>1 vie : </p>
+            <button id="playerlife"></button>
+        </div>
+    </div>
+
+    <div id="information-menu">
+        <div>
+            <p>Vitesse d'attaque: <span id="label-bulletspeed"></span></p>
+            <p>Dégats: <span id="label-damage"></span></p>
+            <p>Vitesse déplacement: <span id="label-playerspeed"></span></p>
+            <p>Apparition monstres: <span id="label-apparition"></span></p>
+        </div>
+    </div>
+
+    <script src="./utils.js"></script>
+    <script src="./InputHandler.js"></script>
+    <script src="./Player.js"></script>
+    <script src="./Projectile.js"></script>
+    <script src="./enemies/Enemy.js"></script>
+    <script src="./enemies/WaveOfDespair.js"></script>
+    <script src="./enemies/Minion1.js"></script>
+    <script src="./enemies/Minion2.js"></script>
+    <script src="./enemies/boss/BossAngry.js"></script>
+    <script src="./UI.js"></script>
+    <script src="./Game.js"></script>
+    <script src="./AmeliorationMenu.js"></script>
+
+</body>
+
+</html>

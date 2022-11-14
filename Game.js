@@ -164,7 +164,7 @@ window.addEventListener("load", function () {
     addEnemy() {
       const minion1TimeMax = 10;
       const minion2TimeMax = 20;
-      const minion3TimeMax = 30;
+      const minion3TimeMax = 100;
 
       this.invokeWaveOfDespairRandomly();
 
