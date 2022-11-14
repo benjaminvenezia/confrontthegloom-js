@@ -153,10 +153,14 @@ window.addEventListener("load", function () {
       return this.bossAngryArrived;
     }
 
+    getBossActivation() {
+      return this.bossActivation;
+    }
+
     addEnemy() {
-      const minion1TimeMax = 20;
-      const minion2TimeMax = 40;
-      const minion3TimeMax = 60;
+      const minion1TimeMax = 10;
+      const minion2TimeMax = 20;
+      const minion3TimeMax = 30;
 
       this.invokeWaveOfDespairRandomly();
 

@@ -61,8 +61,13 @@ class UI {
     this.printLives(context);
     this.printEndGameMessage(context);
 
-    if (this.game.getBossAngryArrived()) {
-      this.printBossMessage(context, "Affrontez votre colère.");
+    if (this.game.getBossAngryArrived() && this.game.getBossActivation()) {
+      let message = "Affrontez votre colère.";
+      this.printBossMessage(context, message);
+
+      if (!this.game.getBossActivation()) {
+        message = "";
+      }
     }
 
     context.restore();
