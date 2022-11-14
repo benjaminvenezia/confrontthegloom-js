@@ -135,7 +135,6 @@ window.addEventListener("load", function () {
     draw(context) {
       this.player.draw(context);
       this.ui.draw(context);
-      console.log(this.initialEnemyInterval);
 
       this.enemies.forEach((enemy) => {
         enemy.draw(context);
@@ -144,9 +143,12 @@ window.addEventListener("load", function () {
 
     invokeWaveOfDespairRandomly() {
       const numberToEnableWaveOfDespair = 33;
-      const randomNumber = getRandomNumber(1, 40);
+      const randomNumber = getRandomNumber(1, 60);
+      let isAlreadyAWave = false;
 
-      if (randomNumber === numberToEnableWaveOfDespair && !this.bossActivation) {
+      isAlreadyAWave = this.enemies.some((e) => e.type === "wave");
+
+      if (randomNumber === numberToEnableWaveOfDespair && !this.bossActivation && !isAlreadyAWave) {
         this.enemies.push(new WaveOfDespair(this));
       }
     }
