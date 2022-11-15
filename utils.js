@@ -38,13 +38,13 @@ const calculateAngle = (depart, finish) => {
   return radianToDegree(angle);
 };
 
-const move = (base /*{ x, y }*/, angle, velocity) => {
+const move = (objTo, angle, velocity) => {
   let coordFinish = { x: 0, y: 0 };
 
   const radian = degreeToRadian(angle);
 
-  coordFinish.x = base.x - velocity * Math.cos(radian);
-  coordFinish.y = base.y - velocity * Math.sin(radian);
+  coordFinish.x = objTo.x - velocity * Math.cos(radian);
+  coordFinish.y = objTo.y - velocity * Math.sin(radian);
   return coordFinish;
 };
 

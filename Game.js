@@ -72,6 +72,7 @@ window.addEventListener("load", function () {
         this.difficultyTimer += deltaTime;
       }
     }
+
     // UPDATE
     update(deltaTime) {
       if (!this.gameOver) {
@@ -143,12 +144,12 @@ window.addEventListener("load", function () {
     }
 
     invokeSpecialEnemy() {
-      const numberToEnableWaveOfDespair = 1000;
-      const numberToEnableTorpedo = 1;
-      const randomNumber = getRandomNumber(1, 2);
+      const numberToEnableWaveOfDespair = 25;
+      const numberToEnableTorpedo = 5;
+      const randomNumber = getRandomNumber(1, 50);
       let isAlreadyAWave = false;
 
-      //one waveofdespair at the same time.
+      //one waveofdespair at the same time only!
       isAlreadyAWave = this.enemies.some((e) => e.type === "wave");
 
       if (randomNumber === numberToEnableWaveOfDespair && !this.bossActivation && !isAlreadyAWave) {
@@ -169,8 +170,8 @@ window.addEventListener("load", function () {
     }
 
     addEnemy() {
-      const minion1TimeMax = 10;
-      const minion2TimeMax = 20;
+      const minion1TimeMax = 30;
+      const minion2TimeMax = 50;
       const minion3TimeMax = 100;
 
       this.invokeSpecialEnemy();

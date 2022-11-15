@@ -67,6 +67,11 @@ class Player {
     this.lives = newLive;
   }
 
+  getCoords() {
+    const coords = { x: this.x, y: this.y };
+    return coords;
+  }
+
   shootTop() {
     if (this.game.ammo > 0) {
       this.projectiles.push(new Projectile(this.game, this.ameliorationMenu, this.x + 40, this.y + 22.5));

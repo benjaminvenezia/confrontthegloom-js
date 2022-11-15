@@ -20,3 +20,5 @@
 - changer la taille des projctiles en fonction des dégats
 - faire en sorte que deux waves of despair ne puissent pas apapraitre en meme temps
 - faire en sorte de ne pas pouvoir
+- update en ts
+- mettre les champs en privé
