@@ -142,15 +142,21 @@ window.addEventListener("load", function () {
       });
     }
 
-    invokeWaveOfDespairRandomly() {
-      const numberToEnableWaveOfDespair = 33;
-      const randomNumber = getRandomNumber(1, 60);
+    invokeSpecialEnemy() {
+      const numberToEnableWaveOfDespair = 1000;
+      const numberToEnableTorpedo = 1;
+      const randomNumber = getRandomNumber(1, 2);
       let isAlreadyAWave = false;
 
+      //one waveofdespair at the same time.
       isAlreadyAWave = this.enemies.some((e) => e.type === "wave");
 
       if (randomNumber === numberToEnableWaveOfDespair && !this.bossActivation && !isAlreadyAWave) {
         this.enemies.push(new WaveOfDespair(this));
+      }
+
+      if (randomNumber === numberToEnableTorpedo && !this.bossActivation) {
+        this.enemies.push(new Torpedo(this));
       }
     }
 
@@ -167,7 +173,7 @@ window.addEventListener("load", function () {
       const minion2TimeMax = 20;
       const minion3TimeMax = 100;
 
-      this.invokeWaveOfDespairRandomly();
+      this.invokeSpecialEnemy();
 
       if (this.getFormattedTime(this.gameTime) < minion1TimeMax) {
         this.enemies.push(new Minion1(this));

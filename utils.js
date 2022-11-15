@@ -25,27 +25,43 @@ function play() {
   audio.play();
 }
 
-// function setupGameAudio(is_paused) {
-//   if (!is_paused) {
-//     let audio = document.getElementById("gameaudio");
-//     console.log("Start audio!!");
-//     audio.play();
-//   }
-// }
+/**
+ * @author Mipam Guillot
+ * Calculate the angle between two points
+ * @param depart
+ * @param finish
+ * @returns angle
+ */
+const calculateAngle = (depart, finish) => {
+  let angle = Math.atan2(depart.y - finish.y, depart.x - finish.x);
 
-// function silenceAudio() {
-//   setupGameAudio(true);
-//   let audio = document.getElementById("gameaudio");
-//   console.log("Stop audio!!");
-//   audio.pause();
-// }
+  return radianToDegree(angle);
+};
 
-// function isPlaying(currentAudio) {
-//   return currentAudio && currentAudio.currentTime > 0 && !currentAudio.paused && !currentAudio.ended && currentAudio.readyState > 2;
-// }
+const move = (base /*{ x, y }*/, angle, velocity) => {
+  let coordFinish = { x: 0, y: 0 };
 
-// function startGameAudio() {
-//   if (!isPlaying(gameaudio)) {
-//     setupGameAudio();
-//   }
-// }
+  const radian = degreeToRadian(angle);
+
+  coordFinish.x = base.x - velocity * Math.cos(radian);
+  coordFinish.y = base.y - velocity * Math.sin(radian);
+  return coordFinish;
+};
+
+/**
+ * Convert radian to degree
+ * @author Mipam Guillot
+ * @param radian
+ * @returns degree
+ */
+const radianToDegree = (radian) => {
+  return (radian * 180) / Math.PI;
+};
+/**
+ * Convert degree to radian
+ * @param degree
+ * @returns radian
+ */
+const degreeToRadian = (degree) => {
+  return (degree * Math.PI) / 180;
+};

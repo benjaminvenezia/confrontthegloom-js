@@ -5,6 +5,7 @@ class UI {
     this.fontSize = 25;
     this.fontFamily = "Helvetica";
     this.color = "white";
+    this.isSoundDeathActivated = false;
   }
 
   printTimer(context) {
@@ -28,6 +29,12 @@ class UI {
   printEndGameMessage(context) {
     if (this.game.getGameOver() === true || this.game.player.lives === 0) {
       this.game.setGameOver(true);
+
+      if (!this.isSoundDeathActivated) {
+        this.game.sound.hurtSound();
+        this.isSoundDeathActivated = true;
+      }
+
       context.textAlign = "center";
 
       let message1 = "Tu as perdu...";
