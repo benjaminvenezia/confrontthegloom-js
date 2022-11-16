@@ -1,6 +1,6 @@
 import { iAmeliorationMenu, iGame, iPlayer, iProjectile } from "./typescript/interfaces";
 
-class Player implements iPlayer {
+class Player {
   game: iGame;
   width: number;
   ameliorationMenu: iAmeliorationMenu;
@@ -27,7 +27,7 @@ class Player implements iPlayer {
     this.lives = ameliorationMenu.getPlayerLife();
   }
 
-  update() {
+  public update(): void {
     let py = this.y;
     let px = this.x;
     let gHeight = this.game.height;
@@ -72,7 +72,7 @@ class Player implements iPlayer {
     this.projectiles = this.projectiles.filter((projectile) => !projectile.getMarkedForDeletion());
   }
 
-  draw(context: CanvasRenderingContext2D) {
+  public draw(context: CanvasRenderingContext2D): void {
     context.fillStyle = "orange";
     context.fillRect(this.x, this.y, this.width, this.height);
 
@@ -81,24 +81,24 @@ class Player implements iPlayer {
     });
   }
 
-  setLife(newLive: number) {
+  public setLife(newLive: number): void {
     this.lives = newLive;
   }
 
-  getCoords() {
+  public getCoords(): object {
     const coords = { x: this.x, y: this.y };
     return coords;
   }
 
-  getHeight() {
+  public getHeight(): number {
     return this.height;
   }
 
-  getWidth() {
+  public getWidth(): number {
     return this.width;
   }
 
-  shootTop() {
+  public shootTop(): void {
     if (this.game.ammo > 0) {
       this.projectiles.push(new Projectile(this.game, this.ameliorationMenu, this.x + 40, this.y + 22.5));
       this.game.ammo--;

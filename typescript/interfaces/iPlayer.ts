@@ -19,4 +19,5 @@ export default interface iPlayer {
   shootTop(): void;
   getHeight(): number;
   getWidth(): number;
+  draw(): void;
 }

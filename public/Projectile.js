@@ -14,6 +14,9 @@ class Projectile {
     getMarkedForDeletion() {
         return this.markedForDeletion;
     }
+    getDamage() {
+        return this.damage;
+    }
     update() {
         this.x += this.speed;
         if (this.x > this.game.width) {

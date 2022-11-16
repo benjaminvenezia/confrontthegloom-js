@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 window.addEventListener("load", function () {
     const canvas = document.getElementById("canvas1");
     const ctx = canvas.getContext("2d");
@@ -59,6 +60,9 @@ window.addEventListener("load", function () {
         }
         getGameOver() {
             return this.gameOver;
+        }
+        getGameTime() {
+            return this.gameTime;
         }
         getFormattedTime(gameTime) {
             return (this.gameTime * 0.001).toFixed(1);

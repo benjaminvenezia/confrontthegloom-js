@@ -37,7 +37,7 @@ window.addEventListener("load", function () {
     difficultyInterval: number;
     enemyIntervalDecrement: number;
 
-    constructor(width, height) {
+    constructor(width: number, height: number) {
       this.width = width;
       this.height = height;
       this.sound = new Sound(this);
@@ -176,7 +176,7 @@ window.addEventListener("load", function () {
       }
     }
 
-    draw(context) {
+    draw(context: CanvasRenderingContext2D) {
       this.player.draw(context);
       this.ui.draw(context);
 

@@ -1,13 +1,13 @@
 import { iProjectile, iGame, iAmeliorationMenu } from "./typescript/interfaces";
 
 class Projectile implements iProjectile {
-  game: iGame;
-  x: number;
-  y: number;
-  speed: number;
-  width: number;
-  height: number;
-  damage: number;
+  private game: iGame;
+  private x: number;
+  private y: number;
+  private speed: number;
+  private width: number;
+  private height: number;
+  private damage: number;
   private markedForDeletion: boolean;
 
   constructor(game: iGame, ameliorationMenu: iAmeliorationMenu, x: number, y: number) {
@@ -21,11 +21,15 @@ class Projectile implements iProjectile {
     this.markedForDeletion = false;
   }
 
-  getMarkedForDeletion() {
+  public getMarkedForDeletion(): boolean {
     return this.markedForDeletion;
   }
 
-  update() {
+  public getDamage(): number {
+    return this.damage;
+  }
+
+  public update(): void {
     this.x += this.speed;
 
     if (this.x > this.game.width) {
@@ -33,7 +37,7 @@ class Projectile implements iProjectile {
     }
   }
 
-  draw(context: CanvasRenderingContext2D) {
+  public draw(context: CanvasRenderingContext2D): void {
     context.fillStyle = "yellow";
     context.fillRect(this.x, this.y, this.width, this.height);
   }
