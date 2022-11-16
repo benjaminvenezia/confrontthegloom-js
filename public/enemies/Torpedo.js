@@ -9,8 +9,8 @@ class Torpedo extends Enemy {
         this.color = "pink";
         this.type = "torpedo";
         this.xp = this.lives;
-        this.y = Math.random() * (this.game.height - this.height / 2);
-        this.x = this.game.width;
+        this.y = Math.random() * (game.height - this.height / 2);
+        this.x = game.width;
         this.angleInDegree = 0;
         this.speedX = -0.9;
     }
@@ -18,12 +18,12 @@ class Torpedo extends Enemy {
         this.setAngleInDegree();
         this.moveTorpedo();
         if (this.x + this.width < 0) {
-            this.markedForDeletion = true;
+            super.markedForDeletion = true;
         }
     }
     setAngleInDegree() {
         const from = { x: this.x, y: this.y };
-        const { x, y } = this.game.player.getCoords();
+        const { x, y } = super.game.player.getCoords();
         const to = { x, y };
         const radianAngle = calculateAngle(from, to);
         this.angleInDegree = radianToDegree(radianAngle);

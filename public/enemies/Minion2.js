@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 class Minion2 extends Enemy {
     constructor(game) {
         super(game);
@@ -8,6 +9,6 @@ class Minion2 extends Enemy {
         this.color = "blue";
         this.type = "minion2";
         this.xp = this.lives;
-        this.y = Math.random() * (this.game.height - this.height / 2);
+        this.y = Math.random() * (game.height - this.height / 2);
     }
 }
