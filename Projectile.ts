@@ -1,6 +1,6 @@
 import { iProjectile, iGame, iAmeliorationMenu } from "./typescript/interfaces";
 
-class Projectile implements iProjectile {
+class Projectile {
   private game: iGame;
   private x: number;
   private y: number;

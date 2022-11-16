@@ -34,18 +34,18 @@ class Sound {
     }
   }
 
-  silenceAudio() {
+  public silenceAudio(): void {
     console.log("Stop audio!!");
     this.is_paused = !this.is_paused;
 
     this.audio.pause();
   }
 
-  isPlaying(currentAudio) {
+  public isPlaying(currentAudio: any): boolean {
     return currentAudio && currentAudio.currentTime > 0 && !currentAudio.paused && !currentAudio.ended && currentAudio.readyState > 2;
   }
 
-  startGameAudio() {
+  public startGameAudio(): void {
     if (!this.isPlaying(gameaudio)) {
       this.setupGameAudio();
     }

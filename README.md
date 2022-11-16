@@ -22,3 +22,4 @@
 - faire en sorte de ne pas pouvoir
 - update en ts
 - mettre les champs en privé
+- repenser la class sound
