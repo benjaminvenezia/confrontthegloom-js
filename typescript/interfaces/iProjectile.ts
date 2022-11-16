@@ -1,6 +1,6 @@
 import iGame from "./iGame";
 
-export default interface Projectile {
+export default interface iProjectile {
   game: iGame;
   x: number;
   y: number;
@@ -8,6 +8,7 @@ export default interface Projectile {
   width: number;
   height: number;
   damage: number;
-  markedForDeletion: boolean;
-  update(): null;
+  update(): void;
+  draw(context: CanvasRenderingContext2D): void;
+  getMarkedForDeletion(): boolean;
 }

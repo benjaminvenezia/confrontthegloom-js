@@ -69,10 +69,10 @@ class Player implements iPlayer {
       projectile.update();
     });
 
-    this.projectiles = this.projectiles.filter((projectile) => !projectile.markedForDeletion);
+    this.projectiles = this.projectiles.filter((projectile) => !projectile.getMarkedForDeletion());
   }
 
-  draw(context) {
+  draw(context: CanvasRenderingContext2D) {
     context.fillStyle = "orange";
     context.fillRect(this.x, this.y, this.width, this.height);
 
@@ -81,7 +81,7 @@ class Player implements iPlayer {
     });
   }
 
-  setLife(newLive) {
+  setLife(newLive: number) {
     this.lives = newLive;
   }
 

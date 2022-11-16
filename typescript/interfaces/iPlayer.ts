@@ -15,7 +15,8 @@ export default interface iPlayer {
   projectiles: Array<iProjectile>;
   lives: number;
 
-  shootTop(): null;
+  update(): void;
+  shootTop(): void;
   getHeight(): number;
   getWidth(): number;
 }

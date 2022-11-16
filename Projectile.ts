@@ -1,4 +1,4 @@
-import { iProjectile, iGame } from "./typescript/interfaces";
+import { iProjectile, iGame, iAmeliorationMenu } from "./typescript/interfaces";
 
 class Projectile implements iProjectile {
   game: iGame;
@@ -10,7 +10,7 @@ class Projectile implements iProjectile {
   damage: number;
   private markedForDeletion: boolean;
 
-  constructor(game, ameliorationMenu, x, y) {
+  constructor(game: iGame, ameliorationMenu: iAmeliorationMenu, x: number, y: number) {
     this.game = game;
     this.x = x;
     this.y = y;
@@ -33,7 +33,7 @@ class Projectile implements iProjectile {
     }
   }
 
-  draw(context) {
+  draw(context: CanvasRenderingContext2D) {
     context.fillStyle = "yellow";
     context.fillRect(this.x, this.y, this.width, this.height);
   }

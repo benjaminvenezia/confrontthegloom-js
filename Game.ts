@@ -1,3 +1,5 @@
+import { iAmeliorationMenu, iEnemy, iGame, iInputHandler, iPlayer, iSound, iUI } from "./typescript/interfaces";
+
 window.addEventListener("load", function () {
   const canvas = document.getElementById("canvas1");
   const ctx = canvas.getContext("2d");
@@ -10,7 +12,31 @@ window.addEventListener("load", function () {
 
   class Background {}
 
-  class Game {
+  class Game implements iGame {
+    width: number;
+    height: number;
+    sound: iSound;
+    ameliorationMenu: iAmeliorationMenu;
+    player: iPlayer;
+    input: iInputHandler;
+    ui: iUI;
+    keys: Array<string>;
+    enemies: Array<iEnemy>;
+    enemyTimer: number;
+    initialEnemyInterval: number;
+    ammo: number;
+    maxAmmo: number;
+    ammoTimer: number;
+    ammoInterval: number;
+    gameOver: boolean;
+    xp: number;
+    gameTime: number;
+    bossActivation: boolean;
+    bossAngryArrived: boolean;
+    difficultyTimer: number;
+    difficultyInterval: number;
+    enemyIntervalDecrement: number;
+
     constructor(width, height) {
       this.width = width;
       this.height = height;
@@ -41,39 +67,43 @@ window.addEventListener("load", function () {
       this.enemyIntervalDecrement = this.ameliorationMenu.getEnemyIntervalDecrement();
     }
 
-    getSound() {
+    getSound(): iSound {
       return this.sound;
     }
 
-    getPlayer() {
+    getPlayer(): iPlayer {
       return this.player;
     }
 
-    getKeys() {
+    getKeys(): Array<String> {
       return this.keys;
     }
 
-    setXp(newXp) {
+    setXp(newXp: number): void {
       this.xp = newXp;
     }
 
-    getXp() {
+    getXp(): number {
       return this.xp;
     }
 
-    setGameOver(bool) {
+    setGameOver(bool: boolean): void {
       this.gameOver = bool;
     }
 
-    getGameOver() {
+    getGameOver(): boolean {
       return this.gameOver;
     }
 
-    getFormattedTime(gameTime) {
+    getGameTime(): number {
+      return this.gameTime;
+    }
+
+    getFormattedTime(gameTime: number): String {
       return (this.gameTime * 0.001).toFixed(1);
     }
 
-    updateEnemiesDifficulty(deltaTime) {
+    updateEnemiesDifficulty(deltaTime: number): void {
       const minimumIntervalTimeInMs = 300;
 
       if (this.difficultyTimer > this.difficultyInterval && this.initialEnemyInterval > minimumIntervalTimeInMs) {
@@ -86,7 +116,7 @@ window.addEventListener("load", function () {
     }
 
     // UPDATE
-    update(deltaTime) {
+    update(deltaTime: number) {
       if (!this.gameOver) {
         this.updateEnemiesDifficulty(deltaTime);
         this.gameTime += deltaTime;
