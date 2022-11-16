@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 class Torpedo extends Enemy {
     constructor(game) {
         super(game);
@@ -10,7 +11,7 @@ class Torpedo extends Enemy {
         this.xp = this.lives;
         this.y = Math.random() * (this.game.height - this.height / 2);
         this.x = this.game.width;
-        this.angleInDegree = null;
+        this.angleInDegree = 0;
         this.speedX = -0.9;
     }
     update() {

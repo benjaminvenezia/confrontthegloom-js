@@ -8,7 +8,7 @@ class Sound {
     this.is_paused = false;
   }
 
-  shotSound() {
+  public shotSound(): void {
     const audio = new Audio("./assets/sounds/fireball_sound.wav");
     audio.play();
   }

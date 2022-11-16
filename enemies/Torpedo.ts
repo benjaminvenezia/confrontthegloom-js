@@ -1,5 +1,18 @@
+import { iGame } from "../typescript/interfaces";
+
 class Torpedo extends Enemy {
-  constructor(game) {
+  private width: number;
+  private height: number;
+  private lives: number;
+  private color: String;
+  private type: String;
+  private xp: number;
+  private y: number;
+  private x: number;
+  private angleInDegree: number;
+  private speedX: number;
+
+  constructor(game: iGame) {
     super(game);
     this.width = 38;
     this.height = 29;
@@ -9,7 +22,7 @@ class Torpedo extends Enemy {
     this.xp = this.lives;
     this.y = Math.random() * (this.game.height - this.height / 2);
     this.x = this.game.width;
-    this.angleInDegree = null;
+    this.angleInDegree = 0;
     this.speedX = -0.9;
   }
 

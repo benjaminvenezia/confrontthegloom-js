@@ -1,6 +1,6 @@
 import { iAmeliorationMenu, iGame, iPlayer, iProjectile } from "./typescript/interfaces";
 
-class Player {
+class Player implements iPlayer {
   game: iGame;
   width: number;
   ameliorationMenu: iAmeliorationMenu;
