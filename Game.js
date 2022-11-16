@@ -41,6 +41,18 @@ window.addEventListener("load", function () {
       this.enemyIntervalDecrement = this.ameliorationMenu.getEnemyIntervalDecrement();
     }
 
+    getSound() {
+      return this.sound;
+    }
+
+    getPlayer() {
+      return this.player;
+    }
+
+    getKeys() {
+      return this.keys;
+    }
+
     setXp(newXp) {
       this.xp = newXp;
     }
