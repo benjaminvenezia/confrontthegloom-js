@@ -1,4 +1,8 @@
 class Sound {
+  private audio: any;
+  private btn_silence: any;
+  private is_paused: boolean;
+
   constructor() {
     this.audio = document.getElementById("gameaudio");
     this.btn_silence = document.getElementById("btn_silence_audio");
@@ -13,12 +17,12 @@ class Sound {
     audio.play();
   }
 
-  contactWithEnnemySound() {
+  public contactWithEnnemySound(): void {
     const audio = new Audio("./assets/sounds/choc_with_enemy.wav");
     audio.play();
   }
 
-  hurtSound() {
+  public hurtSound(): void {
     const audio = new Audio("./assets/sounds/hurtSound.wav");
     audio.play();
   }
