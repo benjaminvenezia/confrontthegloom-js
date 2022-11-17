@@ -67,11 +67,11 @@ window.addEventListener("load", function () {
       this.enemyIntervalDecrement = this.ameliorationMenu.getEnemyIntervalDecrement();
     }
 
-    getSound(): iSound {
+    public getSound(): iSound {
       return this.sound;
     }
 
-    getPlayer(): iPlayer {
+    public getPlayer(): iPlayer {
       return this.player;
     }
 

@@ -36,7 +36,7 @@ class Torpedo extends Enemy {
 
   setAngleInDegree() {
     const from = { x: this.x, y: this.y };
-    const { x, y } = super.game.player.getCoords();
+    const { x, y } = this.game.getPlayer().getCoords();
     const to = { x, y };
 
     const radianAngle = calculateAngle(from, to);

@@ -23,3 +23,4 @@
 - update en ts
 - mettre les champs en privé
 - repenser la class sound
+- changer la musique quand un boss apparaît

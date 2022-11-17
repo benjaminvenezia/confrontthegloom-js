@@ -20,7 +20,7 @@ class InputHandler {
                 this.game.keys.push(e.key);
             }
             else if (e.key === " ") {
-                this.game.getSound().shotSound();
+                // this.game.getSound().shotSound();
                 this.game.getPlayer().shootTop();
             }
         });
