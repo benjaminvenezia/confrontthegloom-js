@@ -12,6 +12,7 @@ class Player {
   maxSpeed: number;
   projectiles: Array<iProjectile>;
   lives: number;
+  markedForDeletion: boolean;
 
   constructor(game: iGame, ameliorationMenu: iAmeliorationMenu) {
     this.game = game;
@@ -25,6 +26,7 @@ class Player {
     this.maxSpeed = ameliorationMenu.getPlayerSpeed();
     this.projectiles = [];
     this.lives = ameliorationMenu.getPlayerLife();
+    this.markedForDeletion = false;
   }
 
   public update(): void {
@@ -81,8 +83,20 @@ class Player {
     });
   }
 
+  public getMarkedForDeletion(): boolean {
+    return this.markedForDeletion;
+  }
+
+  public setMarkedForDeletion(setter: boolean) {
+    this.markedForDeletion = setter;
+  }
+
   public setLife(newLive: number): void {
     this.lives = newLive;
+  }
+
+  public getLife(): number {
+    return this.lives;
   }
 
   public getCoords(): object {

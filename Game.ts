@@ -12,7 +12,7 @@ window.addEventListener("load", function () {
 
   class Background {}
 
-  class Game implements iGame {
+  class Game {
     width: number;
     height: number;
     sound: iSound;
@@ -122,6 +122,10 @@ window.addEventListener("load", function () {
         this.gameTime += deltaTime;
       }
 
+      if (this.player.getLife() === 0) {
+        this.player.setMarkedForDeletion(true);
+      }
+
       this.player.update();
 
       if (this.ammoTimer > this.ammoInterval) {
@@ -139,8 +143,10 @@ window.addEventListener("load", function () {
 
         if (checkCollision(this.player, enemy)) {
           if (enemy.type === "wave" || enemy.type === "boss") {
+            this.player.setMarkedForDeletion(true);
             this.setGameOver(true);
           }
+
           this.sound.contactWithEnnemySound();
           enemy.markedForDeletion = true;
 
@@ -177,7 +183,9 @@ window.addEventListener("load", function () {
     }
 
     draw(context: CanvasRenderingContext2D) {
-      this.player.draw(context);
+      if (!this.player.getMarkedForDeletion()) {
+        this.player.draw(context);
+      }
       this.ui.draw(context);
 
       this.enemies.forEach((enemy) => {
@@ -212,8 +220,8 @@ window.addEventListener("load", function () {
     }
 
     addEnemy() {
-      const minion1TimeMax = 30;
-      const minion2TimeMax = 50;
+      const minion1TimeMax = 5;
+      const minion2TimeMax = 10;
       const minion3TimeMax = 100;
 
       this.invokeSpecialEnemy();

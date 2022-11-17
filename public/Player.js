@@ -13,6 +13,7 @@ class Player {
         this.maxSpeed = ameliorationMenu.getPlayerSpeed();
         this.projectiles = [];
         this.lives = ameliorationMenu.getPlayerLife();
+        this.markedForDeletion = false;
     }
     update() {
         let py = this.y;
@@ -58,8 +59,17 @@ class Player {
             projectile.draw(context);
         });
     }
+    getMarkedForDeletion() {
+        return this.markedForDeletion;
+    }
+    setMarkedForDeletion(setter) {
+        this.markedForDeletion = setter;
+    }
     setLife(newLive) {
         this.lives = newLive;
+    }
+    getLife() {
+        return this.lives;
     }
     getCoords() {
         const coords = { x: this.x, y: this.y };

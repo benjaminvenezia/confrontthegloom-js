@@ -84,6 +84,9 @@ window.addEventListener("load", function () {
                 this.updateEnemiesDifficulty(deltaTime);
                 this.gameTime += deltaTime;
             }
+            if (this.player.getLife() === 0) {
+                this.player.setMarkedForDeletion(true);
+            }
             this.player.update();
             if (this.ammoTimer > this.ammoInterval) {
                 if (this.ammo < this.maxAmmo) {
@@ -98,6 +101,7 @@ window.addEventListener("load", function () {
                 enemy.update();
                 if (checkCollision(this.player, enemy)) {
                     if (enemy.type === "wave" || enemy.type === "boss") {
+                        this.player.setMarkedForDeletion(true);
                         this.setGameOver(true);
                     }
                     this.sound.contactWithEnnemySound();
@@ -130,7 +134,9 @@ window.addEventListener("load", function () {
             }
         }
         draw(context) {
-            this.player.draw(context);
+            if (!this.player.getMarkedForDeletion()) {
+                this.player.draw(context);
+            }
             this.ui.draw(context);
             this.enemies.forEach((enemy) => {
                 enemy.draw(context);
@@ -157,8 +163,8 @@ window.addEventListener("load", function () {
             return this.bossActivation;
         }
         addEnemy() {
-            const minion1TimeMax = 30;
-            const minion2TimeMax = 50;
+            const minion1TimeMax = 5;
+            const minion2TimeMax = 10;
             const minion3TimeMax = 100;
             this.invokeSpecialEnemy();
             if (this.getFormattedTime(this.gameTime) < minion1TimeMax) {

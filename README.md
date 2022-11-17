@@ -24,3 +24,4 @@
 - mettre les champs en privé
 - repenser la class sound
 - changer la musique quand un boss apparaît
+- souci de logique dans le code au niveau du gameover, c'est dans UI qu'on gère la logique du joueur à 0 pdv
