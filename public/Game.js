@@ -8,13 +8,47 @@ window.addEventListener("load", function () {
     class Particle {
     }
     class Layer {
+        constructor(game, image, speedModifier) {
+            this.game = game;
+            this.image = image;
+            this.speedModifier = speedModifier;
+            this.width = 1800;
+            this.height = 500;
+            this.x = 0;
+            this.y = 0;
+        }
+        update() {
+            if (this.x <= -this.width) {
+                this.x = 0;
+            }
+            this.x -= this.game.speed * this.speedModifier;
+        }
+        draw(context) {
+            context.drawImage(this.image, this.x, this.y);
+            context.drawImage(this.image, this.x + this.width, this.y);
+        }
     }
     class Background {
+        constructor(game) {
+            this.game = game;
+            this.image1 = document.getElementById("layer1");
+            this.image4 = document.getElementById("layer4");
+            this.layer1 = new Layer(this.game, this.image1, 0.2);
+            this.layer4 = new Layer(this.game, this.image4, 2);
+            this.layers = [this.layer1];
+        }
+        update() {
+            this.layers.forEach((layer) => layer.update());
+        }
+        draw(context) {
+            this.layers.forEach((layer) => layer.draw(context));
+        }
     }
     class Game {
         constructor(width, height) {
             this.width = width;
             this.height = height;
+            this.background = new Background(this);
             this.sound = new Sound();
             this.ameliorationMenu = new AmeliorationMenu(this);
             this.player = new Player(this, this.ameliorationMenu);
@@ -34,6 +68,7 @@ window.addEventListener("load", function () {
             this.gameTime = 0;
             this.bossActivation = false;
             this.bossAngryArrived = false;
+            this.speed = 1;
             this.difficultyTimer = 0;
             //Toutes les X secondes, on effectue le décrément
             this.difficultyInterval = this.ameliorationMenu.getDifficultyInterval();
@@ -87,6 +122,8 @@ window.addEventListener("load", function () {
             if (this.player.getLife() === 0) {
                 this.player.setMarkedForDeletion(true);
             }
+            this.background.update();
+            this.background.layer4.update();
             this.player.update();
             if (this.ammoTimer > this.ammoInterval) {
                 if (this.ammo < this.maxAmmo) {
@@ -134,6 +171,7 @@ window.addEventListener("load", function () {
             }
         }
         draw(context) {
+            this.background.draw(context);
             if (!this.player.getMarkedForDeletion()) {
                 this.player.draw(context);
             }
@@ -141,6 +179,7 @@ window.addEventListener("load", function () {
             this.enemies.forEach((enemy) => {
                 enemy.draw(context);
             });
+            this.background.layer4.draw(context);
         }
         invokeSpecialEnemy() {
             const numberToEnableWaveOfDespair = 25;
