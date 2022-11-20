@@ -13,6 +13,10 @@ class Player {
   projectiles: Array<iProjectile>;
   lives: number;
   markedForDeletion: boolean;
+  image: any;
+  frameX: number;
+  frameY: number;
+  maxFrame: number;
 
   constructor(game: iGame, ameliorationMenu: iAmeliorationMenu) {
     this.game = game;
@@ -21,12 +25,16 @@ class Player {
     this.height = 55;
     this.x = 20;
     this.y = 100;
+    this.frameX = 0;
+    this.frameY = 0;
+    this.maxFrame = 12;
     this.speedY = 0;
     this.speedX = 0;
     this.maxSpeed = ameliorationMenu.getPlayerSpeed();
     this.projectiles = [];
     this.lives = ameliorationMenu.getPlayerLife();
     this.markedForDeletion = false;
+    this.image = document.getElementById("player");
   }
 
   public update(): void {
@@ -72,11 +80,28 @@ class Player {
     });
 
     this.projectiles = this.projectiles.filter((projectile) => !projectile.getMarkedForDeletion());
+
+    if (this.frameX < this.maxFrame) {
+      this.frameX++;
+    } else {
+      this.frameX = 0;
+    }
   }
 
   public draw(context: CanvasRenderingContext2D): void {
-    context.fillStyle = "orange";
-    context.fillRect(this.x, this.y, this.width, this.height);
+    context.strokeRect(this.x, this.y, this.width, this.height);
+
+    context.drawImage(
+      this.image,
+      this.frameX * this.width,
+      this.frameY * this.height,
+      this.width,
+      this.height,
+      this.x,
+      this.y,
+      this.width,
+      this.height
+    );
 
     this.projectiles.forEach((projectile) => {
       projectile.draw(context);
