@@ -19,11 +19,13 @@ class Sound {
 
   public contactWithEnnemySound(): void {
     const audio = new Audio("./assets/sounds/choc_with_enemy.wav");
+    audio.volume = 0.1;
     audio.play();
   }
 
   public hurtSound(): void {
     const audio = new Audio("./assets/sounds/hurtSound.wav");
+    audio.volume = 0.1;
     audio.play();
   }
 

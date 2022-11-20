@@ -14,10 +14,12 @@ class Sound {
     }
     contactWithEnnemySound() {
         const audio = new Audio("./assets/sounds/choc_with_enemy.wav");
+        audio.volume = 0.1;
         audio.play();
     }
     hurtSound() {
         const audio = new Audio("./assets/sounds/hurtSound.wav");
+        audio.volume = 0.5;
         audio.play();
     }
     setupGameAudio() {
