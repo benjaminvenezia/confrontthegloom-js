@@ -1,4 +1,5 @@
 * {
+  font-family: "Cinzel", serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -9,21 +10,37 @@ body {
 }
 
 #amelioration-menu {
+  display: flex;
+  flex-direction: column;
+  color: white;
   padding: 20px;
   position: absolute;
-  bottom: 1%;
+  bottom: 0%;
   box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.315);
-  left: 50%;
-  background-color: rgba(255, 255, 255, 0.902);
+  right: 19%;
+  width: 300px;
+}
+
+.amelioration-menu__row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
 }
 
 #information-menu {
   padding: 20px;
   position: absolute;
-  left: 0;
-  bottom: 1%;
+  left: 19%;
+  bottom: 0%;
   box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.315);
-  background-color: rgba(255, 255, 255, 0.902);
+  color: white;
+}
+
+.information-menu__row {
+  display: flex;
+  margin-bottom: 5px;
+  width: 300px;
+  justify-content: space-between;
 }
 
 #amelioration-menu div {
@@ -32,9 +49,15 @@ body {
 
 #amelioration-menu button {
   padding: 5px 10px;
+  width: 90px;
   border: none;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.153);
+  background-color: rgb(7, 0, 54);
+  color: white;
   cursor: pointer;
+}
+
+#amelioration-menu button:hover {
+  background-color: rgb(16, 0, 117);
 }
 
 #canvas1 {

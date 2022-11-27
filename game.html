@@ -36,31 +36,44 @@
     <audio id="game-audio" src="./assets/music/homepage-music-hq.mp3"></audio>
 
     <div id="amelioration-menu">
-        <div>
+        <div class="amelioration-menu__row">
             <p>Bullet Speed : </p>
             <button id="bulletspeed"></button>
         </div>
-        <div>
+        <div class="amelioration-menu__row">
             <p>Player Speed : </p>
             <button id="playerspeed"></button>
         </div>
-        <div>
+        <div class="amelioration-menu__row">
             <p>Player Damage : </p>
             <button id="playerdamage"></button>
         </div>
-        <div>
+        <div class="amelioration-menu__row">
             <p>1 vie : </p>
             <button id="playerlife"></button>
         </div>
     </div>
 
     <div id="information-menu">
-        <div>
-            <p>Vitesse d'attaque: <span id="label-bulletspeed"></span></p>
-            <p>Dégats: <span id="label-damage"></span></p>
-            <p>Vitesse déplacement: <span id="label-playerspeed"></span></p>
-            <p>Apparition monstres: <span id="label-apparition"></span></p>
+        <div class="information-menu__row">
+            <p>Vitesse d'attaque:</p>
+            <span id="label-bulletspeed"></span>
         </div>
+        <div class="information-menu__row">
+            <p>Dégats:</p>
+            <span id="label-damage"></span>
+        </div>
+        <div class="information-menu__row">
+            <p>Vitesse déplacement:</p>
+            <span id="label-playerspeed"></span>
+        </div>
+        <div class="information-menu__row">
+            <p>Apparition monstres:</p>
+            <span id="label-apparition"></span>
+        </div>
+
+
+
     </div>
 
     <button id="btn_silence_audio">SILENCEEEEE</button>
