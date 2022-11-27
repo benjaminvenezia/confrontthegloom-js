@@ -50,6 +50,8 @@ body {
 
 #layer1,
 #layer4,
-#player {
+#player,
+#minion1,
+#torpedo {
   display: none;
 }

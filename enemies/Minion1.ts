@@ -5,7 +5,6 @@ class Minion1 extends Enemy {
   private height: number;
   private lives: number;
   private xp: number;
-  private color: string;
   private type: string;
   private y: number;
   private image: HTMLElement | null;
@@ -13,11 +12,10 @@ class Minion1 extends Enemy {
 
   constructor(game: iGame) {
     super(game);
-    this.width = 58;
-    this.height = 69;
+    this.width = 228;
+    this.height = 169;
     this.lives = 2;
     this.xp = this.lives;
-    this.color = "green";
     this.type = "minion1";
     this.y = Math.random() * (game.height - this.height / 2);
     this.image = document.getElementById("minion1");

@@ -19,7 +19,7 @@ class Sound {
     }
     hurtSound() {
         const audio = new Audio("./assets/sounds/hurtSound.wav");
-        audio.volume = 0.5;
+        audio.volume = 0.1;
         audio.play();
     }
     setupGameAudio() {
