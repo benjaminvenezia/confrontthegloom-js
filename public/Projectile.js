@@ -10,6 +10,7 @@ class Projectile {
         this.height = 15;
         this.damage = ameliorationMenu.getPlayerDamage();
         this.markedForDeletion = false;
+        this.image = document.getElementById("projectile");
     }
     getMarkedForDeletion() {
         return this.markedForDeletion;
@@ -24,7 +25,8 @@ class Projectile {
         }
     }
     draw(context) {
-        context.fillStyle = "yellow";
-        context.fillRect(this.x, this.y, this.width, this.height);
+        // context.fillStyle = "yellow";
+        // context.fillRect(this.x, this.y, this.width, this.height);
+        context.drawImage(this.image, this.x, this.y);
     }
 }

@@ -53,6 +53,7 @@ body {
 #player,
 #minion1,
 #torpedo,
-#boss {
+#boss,
+#projectile {
   display: none;
 }

@@ -9,6 +9,7 @@ class Projectile {
   private height: number;
   private damage: number;
   private markedForDeletion: boolean;
+  private image: HTMLElement | null;
 
   constructor(game: iGame, ameliorationMenu: iAmeliorationMenu, x: number, y: number) {
     this.game = game;
@@ -19,6 +20,7 @@ class Projectile {
     this.height = 15;
     this.damage = ameliorationMenu.getPlayerDamage();
     this.markedForDeletion = false;
+    this.image = document.getElementById("projectile");
   }
 
   public getMarkedForDeletion(): boolean {
@@ -38,7 +40,8 @@ class Projectile {
   }
 
   public draw(context: CanvasRenderingContext2D): void {
-    context.fillStyle = "yellow";
-    context.fillRect(this.x, this.y, this.width, this.height);
+    // context.fillStyle = "yellow";
+    // context.fillRect(this.x, this.y, this.width, this.height);
+    context.drawImage(this.image, this.x, this.y);
   }
 }

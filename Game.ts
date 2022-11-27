@@ -202,7 +202,7 @@ window.addEventListener("load", function () {
     invokeSpecialEnemy() {
       const numberToEnableWaveOfDespair = 4;
       const numberToEnableTorpedo = 12;
-      const randomNumber = getRandomNumber(1, 20);
+      const randomNumber = getRandomNumber(1, 15);
       let isAlreadyAWave = false;
 
       //one waveofdespair at the same time only!
