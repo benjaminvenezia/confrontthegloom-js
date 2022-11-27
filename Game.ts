@@ -8,29 +8,6 @@ window.addEventListener("load", function () {
 
   class Particle {}
 
-  class Layer {
-    constructor(game, image, speedModifier) {
-      this.game = game;
-      this.image = image;
-      this.speedModifier = speedModifier;
-      this.width = 1800;
-      this.height = 500;
-      this.x = 0;
-      this.y = 0;
-    }
-
-    update() {
-      if (this.x <= -this.width) {
-        this.x = 0;
-      }
-      this.x -= this.game.speed * this.speedModifier;
-    }
-    draw(context) {
-      context.drawImage(this.image, this.x, this.y);
-      context.drawImage(this.image, this.x + this.width, this.y);
-    }
-  }
-
   class Background {
     constructor(game) {
       this.game = game;
@@ -242,9 +219,9 @@ window.addEventListener("load", function () {
     }
 
     invokeSpecialEnemy() {
-      const numberToEnableWaveOfDespair = 25;
-      const numberToEnableTorpedo = 5;
-      const randomNumber = getRandomNumber(1, 50);
+      const numberToEnableWaveOfDespair = 10;
+      const numberToEnableTorpedo = 25;
+      const randomNumber = getRandomNumber(1, 40);
       let isAlreadyAWave = false;
 
       //one waveofdespair at the same time only!

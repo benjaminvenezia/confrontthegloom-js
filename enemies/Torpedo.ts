@@ -4,27 +4,26 @@ class Torpedo extends Enemy {
   private width: number;
   private height: number;
   private lives: number;
-  private color: String;
   private type: String;
   private xp: number;
   private y: number;
-  private gameX: number;
+  private x: number;
   private angleInDegree: number;
   private speedX: number;
   private image: HTMLElement | null;
-  private frameY: number;
-  private game: any;
+  frameY: number;
 
   constructor(game: iGame) {
     super(game);
     this.width = 213;
-    this.height = 165;
+    this.height = 169;
     this.lives = 10;
-    this.color = "pink";
     this.type = "torpedo";
     this.xp = this.lives;
     this.y = Math.random() * (game.height - this.height / 2);
-    this.gameX = game.width;
+    this.x = game.width;
+    this.frameX = 0;
+    this.maxFrame = 37;
     this.angleInDegree = 0;
     this.speedX = -0.9;
     this.image = document.getElementById("torpedo");
@@ -32,15 +31,21 @@ class Torpedo extends Enemy {
   }
 
   update() {
+    if (this.frameX < this.maxFrame) {
+      this.frameX++;
+    } else {
+      this.frameX = 0;
+    }
+
     this.setAngleInDegree();
     this.moveTorpedo();
-    if (this.gameX + this.width < 0) {
+    if (this.x + this.width < 0) {
       super.markedForDeletion = true;
     }
   }
 
   setAngleInDegree() {
-    const from = { x: this.gameX, y: this.y };
+    const from = { x: this.x, y: this.y };
     const { x, y } = this.game.getPlayer().getCoords();
     const to = { x, y };
 
@@ -49,8 +54,8 @@ class Torpedo extends Enemy {
   }
 
   moveTorpedo() {
-    const { x, y } = move({ x: this.gameX, y: this.y }, this.angleInDegree, this.speedX);
-    this.gameX = x;
+    const { x, y } = move({ x: this.x, y: this.y }, this.angleInDegree, this.speedX);
+    this.x = x;
     this.y = y;
   }
 }

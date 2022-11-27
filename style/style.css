@@ -52,6 +52,7 @@ body {
 #layer4,
 #player,
 #minion1,
-#torpedo {
+#torpedo,
+#boss {
   display: none;
 }

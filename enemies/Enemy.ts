@@ -49,6 +49,7 @@ class Enemy {
       this.height
     );
     context.font = "20px helvetica";
+
     context.fillText(this.lives, this.x, this.y);
   }
 }
