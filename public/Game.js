@@ -145,9 +145,9 @@ window.addEventListener("load", function () {
             this.background.layer4.draw(context);
         }
         invokeSpecialEnemy() {
-            const numberToEnableWaveOfDespair = 10;
-            const numberToEnableTorpedo = 25;
-            const randomNumber = getRandomNumber(1, 40);
+            const numberToEnableWaveOfDespair = 4;
+            const numberToEnableTorpedo = 12;
+            const randomNumber = getRandomNumber(1, 20);
             let isAlreadyAWave = false;
             //one waveofdespair at the same time only!
             isAlreadyAWave = this.enemies.some((e) => e.type === "wave");
