@@ -47,6 +47,18 @@ class Player {
             this.speedY = 0;
             this.speedX = 0;
         }
+        if (this.y > this.game.height - this.height) {
+            this.y = this.game.height - this.height;
+        }
+        if (this.y < -this.height) {
+            this.y = this.height;
+        }
+        if (this.x > this.game.width - this.width) {
+            this.x = this.game.width - this.width;
+        }
+        if (this.x < -this.width) {
+            this.x = this.width;
+        }
         this.y += this.speedY;
         this.x += this.speedX;
         this.maxSpeed = this.ameliorationMenu.getPlayerSpeed();
