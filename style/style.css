@@ -55,6 +55,7 @@ body {
 #minion1,
 #torpedo,
 #boss,
-#projectile {
+#projectile,
+#wave {
   display: none;
 }

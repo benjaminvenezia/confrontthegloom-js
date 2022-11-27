@@ -9,5 +9,14 @@ class WaveOfDespair extends Enemy {
     this.type = "wave";
     this.xp = this.lives;
     this.y = Math.random() * (this.game.height - this.height / 2);
+    this.image = document.getElementById("wave");
+    this.frameY = 0;
+    this.frameX = 1;
+  }
+
+  draw(context: CanvasRenderingContext2D) {
+    context.drawImage(this.image, 0, 0, this.width, this.height, this.x, this.y, this.width, this.height);
+    context.font = "20px helvetica";
+    context.fillText(this.lives, this.x, this.y);
   }
 }
