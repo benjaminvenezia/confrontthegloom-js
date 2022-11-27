@@ -3,7 +3,7 @@ class UI {
     this.game = game;
     this.ameliorationMenu = ameliorationMenu;
     this.fontSize = 25;
-    this.fontFamily = "Helvetica";
+    this.fontFamily = "Cinzel";
     this.color = "white";
     this.isSoundDeathActivated = false;
   }
